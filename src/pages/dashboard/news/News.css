@@ -1,0 +1,22 @@
+.news{
+    justify-content: center;
+    margin: 5px;
+    padding: 5px;
+
+}
+
+.news .alert{
+    border-radius: 20px;
+    width: 100%;
+}
+
+
+@media (max-width:542px) {
+    .news{
+      max-width: 100%;
+    }
+    .transactions{
+      max-width: 100%;
+    }
+    
+  }

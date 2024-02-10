@@ -1,0 +1,150 @@
+
+
+.valid-form{
+    display: block;
+    padding: 50px;
+    height: 600px;
+    max-width: 900px;
+    margin: auto;
+}
+.valid-form form{
+    margin-top: 55px;
+}
+.valid-form p{
+    color:brown;
+    display: block;
+    font-weight: 500;
+    padding: 5px;
+    margin-bottom: 24px;
+}
+.valid-form input,
+.valid-form .phone-number input{
+border: 1px solid black;
+padding: 5px;
+display: block;
+background-color: white;
+font-size: 15px;
+font-weight: 400;
+border-top-right-radius: 18px !important;
+border-bottom-right-radius: 18px !important;
+color: black;
+}
+.phone-number{
+    width: 100%;
+    display:flex;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+.phone-number span{
+    color: #007bff;
+}
+.phone-number input{
+    width: 85% !important;
+    margin: 0px;
+}
+  
+  .valid-form {
+    background-color: #f5f5f5;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    color: black;
+    height: 45px;
+    
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+  }
+
+
+  .databtn{
+    display: block;
+    margin-left: 60px !important;
+    margin-top: 10px !important;
+    width: 160px !important;
+    border-radius: 20px;
+
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Optional: Add more styling for the select dropdown if needed */
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 30px;
+    color: white;
+    background-color: black;
+    background: url('https://cdn.iconscout.com/icon/free/png-256/free-down-arrow-16-460295.png') no-repeat center right;
+    background-size: 20px;
+    border-top-right-radius: 18px !important;
+border-bottom-right-radius: 18px !important;
+    
+  }
+  
+  .notvalid{
+    color: red;
+  }
+
+  .input-group select {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333; /* Text color */
+    background-color: #fff; /* Background color */
+    cursor: pointer;
+    width: 85% !important;
+
+  }
+  
+  .input-group select option {
+    padding: 10px;
+    color: #333; /* Text color */
+    background-color: #fff; /* Background color */
+    
+  }
+  
+  .input-group select option:hover {
+    background-color: #f5f5f5; /* Hover background color */
+  }
+  
+  label{
+    padding: 0;
+    margin: 0;
+    display: block !important;
+    margin-top: 10px;
+
+  }
+ .input-group{
+    display: block !important;
+ }
+  .input-group :disabled{
+    width: 85% !important;
+    display: block !important;
+
+  }

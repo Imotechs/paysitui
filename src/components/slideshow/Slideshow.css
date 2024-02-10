@@ -1,0 +1,30 @@
+.slideshow-container {
+    display: flex;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+
+  }
+  
+  .slideshow-container .slide {
+    min-width: 20%;
+    margin-right: -10px; /* Adjust the margin to reduce space between images */
+    animation: moveSlideshow 2s linear infinite; /* Adjust the animation duration as needed */
+    transition: opacity 0.5s ease-out;
+
+  }
+  
+  
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-300%);
+    }
+  }
+  
+  @keyframes moveSlideshow {
+    100% { 
+      transform: translateX(-66.6666%);  
+    }
+  }

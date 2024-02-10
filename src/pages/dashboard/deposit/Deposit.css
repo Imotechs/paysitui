@@ -1,0 +1,124 @@
+.vba {
+    display: flex;
+    overflow-x: auto;
+    padding: 15px; /* Add padding to the cards */
+
+}
+
+.depositcard {
+    margin: 15px;
+    background-color: rgb(203, 226, 246);
+    border-radius: 20px; 
+    padding: 15px;
+    width: 650px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    min-width: 200px; 
+    display: block;
+    background-image: url('../../../assets/images/paysit_logo.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.depositcard p {
+    margin: 5px; 
+    width: 100%;
+    color: black;
+}
+
+.card-foot {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+}
+
+.card-foot p{
+    margin-left: 8px;
+
+}
+.btn {
+    margin-top: 10px; /* Add some space between buttons and cards */
+}
+
+
+.btn-primary {
+    color: #fff;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.btn-warning {
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: 500;
+
+}
+
+.btn-primary:hover, .btn-warning:hover {
+    opacity: 0.9;
+}
+
+.banksvg svg{
+    font-weight: 900;
+    font-size: 50px;
+    cursor: pointer;
+    
+    
+}
+svg{
+    cursor: pointer;
+}
+.account-no,.bank{
+    font-weight: 800;
+}
+
+
+.desc {
+    background-color: #f7f7f7; 
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+  }
+  
+  .desc p {
+    color: #333;
+    font-size: 16px; 
+    line-height: 1.5; 
+    font-family: 'Crimson Pro', serif;
+
+  }
+  
+.desc ol li{
+    list-style: lower-alpha;
+    padding: 5px;
+    color: black;
+    text-justify: distribute-all-lines;
+    font-family: 'Great Vibes', cursive;
+
+}
+
+.desc input{
+    border: 2px solid black;
+    display: block;
+    font-size: 15px;
+    color: black;
+
+}
+
+.payment-input{
+    margin-left: 20px;
+    margin-top: 20px;
+    background-image: url('../../../assets/images/paysit_logo.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.disabled{
+background-color: rgb(116, 167, 167) !important;
+}

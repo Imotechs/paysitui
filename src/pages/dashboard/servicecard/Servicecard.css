@@ -1,0 +1,171 @@
+
+  .serviceblock{
+    overflow-x:scroll;
+    display: flex;
+    width: 100%;
+  }
+  .cards {
+    display: flex;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    padding: 30px;
+    text-align: center;
+   
+  }
+  @media(min-width:900px){
+    .card{
+      max-width: 80% ;
+      margin: 0px ;
+      padding-left: 0px;
+    }
+    .main-ft {
+      width: 100%;
+      padding: 0px;
+      margin-left: 20px;
+      height: 250px;
+
+    }
+    .service{
+      margin-left: 0px;
+    }
+  }
+
+  @media(max-width: 991px) {
+ .card{
+    grid-template-columns: 1fr;
+    max-width: 1000%;
+   
+   }
+   .card2{
+    height: 363px;
+   }
+   .withdraw-btn,
+   .deposit-btn{
+    max-width: 100%;
+   }
+  }
+  .top-label {
+    text-align: left;
+    padding: 0 !important;
+    margin-bottom: 0px;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 600;
+    line-height: 60px;
+    margin-top: -18px;
+    font-family: 'Dancing Script', cursive;
+
+    
+  }
+  
+  .card {
+    max-width: 550px;
+    border: 0;
+    width: 100%;
+    margin-inline: auto;
+   
+  }
+  
+  .card2{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 100%;
+    width: 100%;
+    margin: 50px;
+    width: 300px;
+    height: 250px;
+    padding: 5px;
+    align-items: center;
+    text-align: center;
+    border-radius: 2rem;
+    background-color: white;
+    --tw-shadow: 0px 0px 56px rgba(69, 69, 69, .2);
+    --tw-shadow-colored: 0px 0px 56px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow);
+  }
+  .contents {
+    position: relative;
+    border: 2px solid transparent;
+    background: linear-gradient(71deg, rgb(4, 99, 47), rgb(0, 0, 0), rgb(4, 99, 47));
+    background-clip: padding-box;
+    border-radius: 25px;
+    padding: 20px;
+    width: 100%;
+  
+  }
+  
+  
+  
+  
+  .main-balance {
+    font-weight: 400;
+    color: white;
+    letter-spacing: -0.02em;
+    line-height: 40px;
+    font-style: normal;
+    font-size: 30px;
+    padding-bottom: 57px;
+  }
+  .balance {
+    font-weight: 300;
+    color: white;
+    letter-spacing: -0.02em;
+    line-height: 40px;
+    font-style: normal;
+    font-size: 30px;
+    padding-bottom: 15px;
+  }
+  .main-ft {
+    font-weight: 600;
+    line-height: 32px;
+    color: hsla(0, 0%, 100%, 0.5);
+    font-size: 16px;
+    max-width: 470px;
+    display: flex;
+  }
+
+  .service{
+    background-color: brown;
+    border-radius: 15px;
+    color:white;
+    text-align: center;
+    font-weight: bold;
+    padding:3px;
+    width: 110px;
+    margin-left: 21px;
+    margin-bottom: 7px;
+    max-height: 70px;
+  }
+
+  @media(max-width: 800px) {
+    .service{
+      margin-left: 10px;
+    }
+    /* .card2{
+      display: none;
+    } */
+  }
+  @media(min-width:23px) and ( max-width: 400px) {
+    .service{
+      margin-left: 10px;
+    }
+  }
+  .service button{
+    background-color: none;
+  }
+
+  .service-name{
+    font-family: 'Playfair Display', serif;
+
+  }
+  .withdraw-btn {
+    background-color: brown;
+    border-radius: 10px;
+    color:black;
+    padding:5px;
+  }
+  
+
+.service-icon{
+
+}

@@ -1,0 +1,38 @@
+body{
+  overflow-y: auto;
+
+}
+.aside {
+    width: 1200px !important;
+    padding: 0 !important;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+  
+    @media screen and (min-width: 992px) and (max-width: 1439px) {
+      max-width: 1279px !important;
+      padding: 0 !important;
+      margin: 0 80px !important;
+      width: auto !important;
+    }
+  
+    @media screen and (max-width: 991px) {
+      max-width: 959px !important;
+      margin: 0 16px !important;
+      padding: 0 !important;
+      width: auto !important;
+    }
+  }
+
+  
+  @media (max-width:542px) {
+    .update{
+      max-width: 100%;
+    }
+    .transactions{
+      max-width: 100%;
+    }
+    
+  }
+
+  

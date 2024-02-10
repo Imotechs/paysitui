@@ -1,0 +1,110 @@
+.txns table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: beige;
+    color: black;
+
+}
+
+
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+#table-data {
+    border: none;
+    background-color: white;
+    color: black;
+  }
+
+
+  .icontent {
+    max-width: 65rem;
+    margin: 2rem auto;
+    padding: 1rem;
+    border: 2px solid #0d373e;
+    border-radius: 8px;
+  }
+  
+  .tablebody {
+    margin: 0rem auto;
+    padding: 2rem;
+    border: 1.5px solid #0d373e;
+    border-radius: 18px;
+    font-family: 'Dancing Script', cursive;
+
+
+  }
+  .tablebody td{
+    border-radius: 0px;
+    background-color: white;
+    font-family: 'Dancing Script', cursive;
+    font-size: 10px;
+
+  }
+  .tablebody td img{
+ 
+    width: 20px;
+    height: 20px;
+  }
+
+  .tablebody tr{
+    border-bottom: 0px;
+    background-color: white;
+
+  }
+  
+.table th, .table td {
+    padding: 0rem;
+    vertical-align: middle;
+    margin: 0px;
+}
+
+td img{
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+   
+}
+
+@media (max-width:542px) {
+    .tablebody{
+        max-width: 100% !important;
+    }
+    .tablebody td{
+        margin-left: 8px;
+        font-size: 8px;
+    
+      }
+}
+
+@media (max-width: 768px) {
+    .tablebody{
+        max-width: 100%;
+    }
+    td img{
+        max-width: 100% !important;
+        height: auto !important;
+        display: block
+    }
+}
+
+.tile input{
+  width: 300px;
+}
+
+.txnssearch{
+  
+border: 1px solid black;
+padding: 5px;
+display: block;
+background-color: white;
+font-size: 15px;
+font-weight: 400;
+border-top-right-radius: 18px !important;
+border-bottom-right-radius: 18px !important;
+color: black;
+
+}
