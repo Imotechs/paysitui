@@ -40,7 +40,7 @@ return (
             </li>
             
             <li className="nav-item @@services__active">
-              <Link to ='/' style={{"color": 'black'}} className="nav-link">BuyData</Link>
+              <Link to ='/dashboard' style={{"color": 'black'}} className="nav-link">BuyData</Link>
             </li>
             <li className="nav-item active">
                <Link to='/login'  style={{"color": 'black'}} className="nav-link">Login</Link>

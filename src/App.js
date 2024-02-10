@@ -25,7 +25,7 @@ import './App.css';
 import './components/header/Header.css'
 import Header from './components/header/Header';
 import React from 'react';
-
+import { Link } from 'react-router-dom'
 function App() {
   const logos = [
     mtn_logo,
@@ -71,20 +71,20 @@ function App() {
               </div>
   
               <div className="mt-4 lg:mt-10">
-                <a href="register" className="text-lg text-white py-2 px-5 rounded-md bg-brand-blue shadow">
+                <Link href="/login" className="text-lg text-white py-2 px-5 rounded-md bg-brand-blue shadow">
                     Join Now
-                </a>
+                </Link>
               </div>
 
           
         
             </div>
 
-  <div className="container font-weight-bold">
+  <div className="container font-weight-bold bd">
     <section className="customer  mt-4 mb-4">
         <div className="container"> <Slideshow images={logos} /></div>
     </section>
-    <img src={paysit} className="z-30 object-contain img-fluid" alt="logo"/>
+    <img src={paysit} className="z-30 object-contain bdimage" alt="logo"/>
 
  </div>
             
@@ -258,7 +258,7 @@ function App() {
             How It Works
         </h1>
 
-        <div className="row gap-5">
+        <div className="gap-5">
             <div className="col px-10 bg-brand-light">
                 <div className="mb-2 mt-4">
                     <div className="relative w-16 h-16 bg-white border-[1px] border-brand rounded-full flex justify-center items-center text-center text-4xl text-brand-yellow p-4">
@@ -268,13 +268,13 @@ function App() {
                 <h3 className="text-base font-bold text-brand mb-2">
                     Create an Account
                 </h3>
-                <p className="text-black mb-6 md:mb-4">
+                <p className="text-black mb-2 md:mb-4">
                 Create an Account to get started. this can be completed within seconds(No Long form to fill).
                 </p>
             </div>
 
             <div className="col px-10 bg-brand-light">
-                <div className="mb-2 mt-4">
+                <div className="mb mt-4">
                     <div className="relative w-16 h-16 bg-white border-[1px] border-brand rounded-full flex justify-center items-center text-center text-4xl text-brand-yellow p-4">
                         2
                     </div>
@@ -304,9 +304,9 @@ function App() {
         </div>
 
         <div className="flex justify-center items-center text-center text-md-start mt-10">
-            <a href="/" className="btn text-brand px-5 border-[1.2px] border-brand lift me-1">
+            <Link href="/login" className="btn text-brand px-5 border-[1.2px] border-brand lift me-1">
                 Get Started
-            </a>
+            </Link>
         </div>
     </section>
     
