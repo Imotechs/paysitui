@@ -108,3 +108,8 @@ border-bottom-right-radius: 18px !important;
 color: black;
 
 }
+.txnssearch input{
+width: 95%;
+border-top-right-radius: 2rem;
+border-bottom-right-radius: 2rem;
+}
