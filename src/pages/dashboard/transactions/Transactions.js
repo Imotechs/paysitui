@@ -1,10 +1,51 @@
-import React from "react";
+import React ,{useContext}from "react";
 import './Transactions.css'
 import glo from '../../../assets/images/glo_logo.png'
+import { userProfileContext } from "../../../components/userprofilecontext/UserContext";
+import nameToLogo from "../../../vitals";
+import { formatDistanceToNow } from 'date-fns';
+
 const Transactions =(props)=>{
     function handleChange(){
         return;
     }
+    const {user, loading } = useContext(userProfileContext);
+
+
+const DateTimeComponent = ({ datetime }) => {
+      const formattedDate = formatDistanceToNow(new Date(datetime), { addSuffix: true });
+      
+      return <span>{formattedDate}</span>;
+    };
+const CurrencyFormatted = ({amount})=>{
+    const formatedcurrency = new Intl.NumberFormat('en-NG', {style: 'currency',currency: 'NGN',}).format(amount);
+return formatedcurrency
+}
+
+const transactionsArray = Array.isArray(user.transactions)
+  ? user.transactions
+    .flatMap((transactionArray) => transactionArray)
+    .sort((a, b) => new Date(b.date_added) - new Date(a.date_added)) // Sort by date_added in descending order
+    .slice(0, 10) // Get the first 10 transactions
+  : [];
+
+const TransactionComponent = ({ transaction }) => (
+  <tr key={transaction.id}>
+    <td><img src={nameToLogo(transaction.service)}/></td>
+    <td>{transaction.item}</td>
+    <td>{transaction.number}</td>
+    <td>{transaction.qty}</td>
+    <td><CurrencyFormatted amount={transaction.cost}/></td>
+    <td><DateTimeComponent datetime={transaction.date_added}/></td>
+    {transaction.completed && 
+    <td ><button className="bg-success " style={{'padding':'3px','color':'white','borderRadius':'8px'}}>completed</button></td>
+    }
+     {transaction.refunded && 
+    <td><button className="bg-danger " style={{'padding':'3px','color':'white', 'borderRadius':'8px'}}>Refunded</button></td>
+            }
+  </tr>
+);
+
     return(
 
 
@@ -13,25 +54,18 @@ const Transactions =(props)=>{
         <div className="tile">
 
             <h2 className="tile-title"><i className="fa fa-briefcase"></i> Recent Transactions</h2>
-            {/* <div className="alert alert-info">
-                <div className="">
-                    To load data, Dial: <i>*425*0635*PIN#</i>
-                </div>
-                <div className="mt-1">
-                    eg. <strong><i>*425*0635*00332277#</i></strong>
-                </div>
-            </div> */}
-            <form action="" method="get" autocomplete="off">
+          
+            <form action="" method="get" autoComplete="off">
                 <div className="form-group">
                     <div className="txnssearch">
                         <input type="text" name="search_query" id="search" className="form-control"
-                        placeholder="Search..." value="" onChange={handleChange}>
+                        placeholder="Search transactions..." value="" onChange={handleChange}>
                        
                     </input>
                     <span className="input" >
-                            <button type="submit" className=" btn-success" style={{'padding':'3px','color':'white', 'borderRadius':'8px', 'marginLeft':'-3px'}}>
+                            {/* <button type="submit" className=" btn-success" style={{'padding':'3px','color':'white', 'borderRadius':'8px', 'marginLeft':'-3px'}}>
                                 <i className="fa fa-search fa-fw"></i> search
-                            </button>
+                            </button> */}
                         </span>
                        
                     </div>
@@ -50,24 +84,9 @@ const Transactions =(props)=>{
                     </tr> */}
                 </thead>
                 <tbody  className="tablebd">
-                    <tr>
-                <td><img src={props.logo}  /></td>
-                <td style={{'padding':'0px'}}>Deposit to wallet</td>
-                <td style={{'padding':'0px'}}>--</td>
-                <td style={{'padding':'0px'}}>₦2500</td>
-                <td style={{'padding':'0px'}}>09016608852</td>
-                <td style={{'padding':'0px'}}>07/02/204</td>
-                <td ><button className="bg-success " style={{'padding':'3px','color':'white','borderRadius':'8px'}}>completed</button></td>
-                </tr>
-                <tr>
-                <td ><img src={glo}  /></td>
-                <td style={{'padding':'0px'}}>Data Subscription</td>
-                <td style={{'padding':'0px'}}>2GB</td>
-                <td style={{'padding':'0px'}}>₦250</td>
-                <td style={{'padding':'0px'}}>09016608852</td>
-                <td style={{'padding':'0px'}}>07/02/204</td>
-                <td><button className="bg-danger " style={{'padding':'3px','color':'white', 'borderRadius':'8px'}}>Refunded</button></td>
-                </tr>
+                {transactionsArray.map((transaction) => (
+                    <TransactionComponent key={transaction.id} transaction={transaction} />
+                    ))}
                 </tbody>
                 </table>
             <div className="px-3 my-2 clearfix">

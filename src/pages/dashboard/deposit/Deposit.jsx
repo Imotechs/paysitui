@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy, faBank } from '@fortawesome/free-solid-svg-icons';
 import Header from '../navbar/header/Header';
 import './Deposit.css';
 import Footer from '../footer/Footer';
 import Account from '../../../components/account/account';
+import { useNavigate } from 'react-router-dom';
+import { fetchUserProfile } from '../../../vitals';
+
 // Importing handleCopyClick is not necessary since the function is defined locally
 // Remove the import statement for handleCopyClick
 
@@ -14,12 +17,17 @@ export default function Deposit(props) {
   const [amountIsValid,setAmountIsValid] = useState(false)
   const [showCards, setShowCards] = useState(true);
   const [showPaymentInput, setShowPaymentInput] = useState(false);
-  const [textToCopy, setTextToCopy] = useState('9426106165'); // Initialize with default value
+  const [loading,setLoading] = useState(false)
+ const[user,setUser] = useState({})
+ const navigateto = useNavigate()
+ const [textToCopy, setTextToCopy] = useState(''); // Initialize with default value
+
+  //console.log(user.account_number)
 
   const handleVBAButtonClick = () => {
     setShowCards(true);
     setShowPaymentInput(false);
-    setTextToCopy('9426106165'); // Set the text for copying when VBA is selected
+    setTextToCopy(user.account_number); // Set the text for copying when VBA is selected
   };
 
   const handleATMButtonClick = () => {
@@ -51,6 +59,33 @@ export default function Deposit(props) {
     }
 
   }
+  
+  useEffect(()=>{
+    const fetchProfile = async () => {
+      try {
+        setLoading(true);
+  
+        const response= await fetchUserProfile(navigateto)
+  
+        if (response.ok) {
+          const userData = await response.json();
+          setUser(userData);
+          setTextToCopy(userData.account_number); 
+        }
+  
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
+    };
+  
+    fetchProfile();
+   
+
+  },[] )
+
+ 
+
   return (
     <div className='deposit'>
       <Header />
@@ -79,10 +114,10 @@ export default function Deposit(props) {
                 <FontAwesomeIcon icon={faBank} />
               </div>
               <p className='bank-name'>Bank Name</p>
-              <p className='bank'>Wema Bank</p>
+              <p className='bank'>{user.bank_name}</p>
               <div className='card-foot'>
                 <p>Account Number</p>
-                <p className='account-no'>9426106165</p>
+                <p className='account-no'>{user.account_number}</p>
                 <div>
                   {isCopied ? (
                     <>
@@ -119,7 +154,7 @@ export default function Deposit(props) {
            
           <div className="payment-input" style={{'height':'30vh'}}>
             <div className="input-group">
-                <input type="text" name="amount" 
+                <input type="number" name="amount" 
                 placeholder="₦" value={amount} onChange={handleChange}
                
                 >

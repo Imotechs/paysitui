@@ -1,0 +1,102 @@
+.transaction-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    outline: none;
+    max-width: 400px;
+    width: 100%;
+    height: 300px;
+    text-align: center;
+    transition: transform 3s ease-out;
+    border-radius: 2rem;
+  }
+  
+  .transaction-overlay {
+    background-color: rgba(38, 5, 5, 0.7);
+  }
+  
+  .modal-content {
+    margin-top: 50px;
+    border: none;
+    margin-left: 30px;
+    background-color: white;
+    position: relative;
+
+  }
+  .modal-content button{
+    margin-left: 70px;
+  }
+  .modal-content h2{
+    text-align: center;
+    padding-right: 80px;
+  }
+  input {
+    width: 60%;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-left: 30px;
+  }
+  
+ .transaction-modal button {
+    background-color: #54c359;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    width: 35%;
+    border-radius: 2rem;
+    cursor: pointer;
+    margin-right: 40px;
+    transition: background-color 0.3s ease-out;
+  }
+  
+  button:hover {
+    background-color: #54c359;
+  }
+  /* .modal-content .closex{
+    margin-left: 120px;
+    text-align: right;
+    font-size: 28px;
+  }
+  
+   */
+
+   .closex {
+    position: absolute;
+    margin-bottom: 25px;
+    top: -97px;
+    right: 6px;
+    cursor: pointer;
+    font-size: 48px;
+    color: #fa0606;
+
+ }
+
+.modal-content .txn-top{
+  text-align: center;
+  margin:0 !important;
+  margin-right: 71px !important;
+
+ }
+
+
+ /* Add any other necessary styles for your input field */
+
+.shake {
+  animation: shake 1s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25%, 75% {
+    transform: translateX(-10px); /* Adjust the distance as needed */
+  }
+  50% {
+    transform: translateX(10px); /* Adjust the distance as needed */
+  }
+}

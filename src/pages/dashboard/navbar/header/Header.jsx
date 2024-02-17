@@ -2,22 +2,23 @@ import React, {useState}from 'react'
 import styles from '../Navbars.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars,faBell} from '@fortawesome/free-solid-svg-icons';
+import { faBars} from '@fortawesome/free-solid-svg-icons';
 import Aside from '../aside/Aside';
-export default function Navbar(){
+import { UserProfileProvider } from '../../../../components/userprofilecontext/UserContext';
+export default function Navbar(props){
     const[isToggled,setIsToggled] = useState(false)
 
     function toggleNavBar(){
         setIsToggled(!isToggled)
-        console.log('is togled ::',isToggled)
     }
     return(
+        <UserProfileProvider>
         <header>
             
         
 
-	<div className={`${styles['wrapper']} bg-primary`}>
-		<Aside isToggled={isToggled}/>
+	<div className={`${styles['wrapper']} `}>
+		<Aside isToggled={isToggled} user = {props.user}/>
         {/* <button className= {`${styles['sidebar-toggle']} ${styles['d-flex']} ${styles['mr-2']}`} > */}
         {/* <FontAwesomeIcon icon={faBell} className=  {`${styles['topright']} ${styles['align-self-center']}`} >
              </FontAwesomeIcon>
@@ -29,7 +30,7 @@ export default function Navbar(){
       
 </div>
 </header>
-
+</UserProfileProvider>
 
 
     )

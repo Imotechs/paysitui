@@ -99,7 +99,9 @@ svg{
     padding: 5px;
     color: black;
     text-justify: distribute-all-lines;
-    font-family: 'Great Vibes', cursive;
+    font-family: 'Crimson Pro', serif;
+
+    /* font-family: 'Great Vibes', cursive; */
 
 }
 
@@ -121,4 +123,9 @@ svg{
 
 .disabled{
 background-color: rgb(116, 167, 167) !important;
+}
+
+.options button{
+    height: 35px;
+    width: 182px;
 }

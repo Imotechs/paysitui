@@ -1,10 +1,14 @@
-import React from "react"
+import React ,{useContext} from "react"
 import './Servicecard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTv,faArrowsSpin,faBarcode,faPlugCirclePlus,faMobileScreenButton} from '@fortawesome/free-solid-svg-icons';
 import dataplug from '../../../assets/images/dataplug.png'
-
+import {userProfileContext } from "../../../components/userprofilecontext/UserContext";
+import CoverPreloader from "../../../components/preloader/Coverpreloader";
+import { Link } from "react-router-dom";
 function Servicecard({account}){
+    const {user,loading} = useContext(userProfileContext)
+
     return(
         <div className=" row serviceblock">
             <div className="col">
@@ -15,13 +19,13 @@ function Servicecard({account}){
             
                 <div className="row main-ft">
                     <div className="service">
-                    <span className="service-icon"><FontAwesomeIcon icon={faArrowsSpin} />
-                    <br/><i className="service-name">Data</i></span>
+                    <Link to ="/dashboard/data"><span className="service-icon"><FontAwesomeIcon icon={faArrowsSpin} />
+                    <br/><i className="service-name">Data</i></span></Link>
                     </div>
-
+                    
                     <div className="service">
-                    <span className="service-icon"><FontAwesomeIcon icon={faTv} />
-                    <br/><i className="service-name">VTU SUBs</i></span>
+                   <span className="service-icon"><FontAwesomeIcon icon={faTv} />
+                    <br/><i className="service-name">TV SUBs</i></span>
                     </div>
 
                     <div className="service">
@@ -47,14 +51,17 @@ function Servicecard({account}){
             </div>
             </div>
             <div className="col">
+                <div className="card2contents">
             <div className="card2 " >
+                    
+                <img src={dataplug} alt="dataphoto"/>
 
-              <img src={dataplug} alt="dataphoto"/>
-              
 
-    </div>
-    </div>
+                </div>
+            </div>
+            </div>
     
+    {loading &&<CoverPreloader loading={loading} isok={false}/>}
 
     </div>
     )

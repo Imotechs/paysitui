@@ -9,17 +9,20 @@ import glo_logo from './assets/images/glo_logo.png'
 import waec_logo from './assets/images/waec_logo.png'
 import startime_logo from './assets/images/startime_logo.png'
 import spectranet_logo from './assets/images/spectranet_logo.png'
-import bills from './assets/images/bills.jpg'
-import data from './assets/images/data.jpg'
-import vtu from "./assets/images/vtu.jpg"
+// import bills from './assets/images/bills.jpg'
+// import data from './assets/images/data.jpg'
+// import vtu from "./assets/images/vtu.jpg"
+
+export const main_url ='http://localhost:8000'
+
 
 export default function nameToLogo(name){
-
+    name = name.toLowerCase()
     const logos = {
         mtn:mtn_logo,
         glo:glo_logo,
-        aitel:aitel_logo,
-        _9mobile:etisalat_logo,
+        airtel:aitel_logo,
+        '9mobile':etisalat_logo,
         waec:waec_logo,
         neco:neco_logo,
         starttime:startime_logo,
@@ -77,7 +80,138 @@ export function validatePhoneNumber(phoneNumber){
 
 
 }
+// Helper function to decode JWT tokens
+const parseJwt = (token) => {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`).join(''));
+  return JSON.parse(jsonPayload);
+};
 
-  
+export async function getAccessToken({ navigateto }) {
+  let accessToken = localStorage.getItem('access_token');
+  const refreshToken = localStorage.getItem('refresh_token');
+
+  if (accessToken) {
+    const decodedToken = parseJwt(accessToken);
+
+    if (decodedToken.exp * 1000 < Date.now()) {
+      // Token has expired, try to refresh
+      try {
+        const refreshResponse = await fetch(`${main_url}/token/refresh/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ refresh: refreshToken }),
+        });
+
+        if (refreshResponse.ok) {
+          const newAccessToken = await refreshResponse.json();
+          localStorage.setItem('access_token', newAccessToken.access_token);
+          accessToken = newAccessToken.access_token;
+        } else {
+          // Refresh failed, redirect to login
+          navigateto('/login');
+        }
+      } catch (error) {
+        console.error('Error during token refresh:', error);
+        // Handle refresh error, redirect to login
+        navigateto('/login');
+      }
+    }
+
+    return accessToken;
+  } else {
+    // No access token found, redirect to login
+    navigateto('/login');
+  }
+}
  
-      
+
+export async function handleLogin({userName,password}) {
+  try {
+    const response = await fetch(`${main_url}/token/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({email:userName, password:password }),
+    });
+    
+  return response
+  } 
+  catch (error) {
+    //console.error('Error during login:', error);
+  }
+}
+
+
+
+
+
+
+export const fetchUserProfile = async ({navigateto}) => {
+    try {
+       const response = await fetch(`${main_url}/user-profile/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getAccessToken({navigateto})}`,         },
+      });
+
+    return response
+    } catch (error) {
+      console.error('Error during  the fetchUserProfile:', error);
+    } finally {
+      //setLoading(false);
+
+      //return response
+  }
+}
+
+
+  //fetchUserProfile()
+
+export const fetchData =async(navigateto)=>{
+  try {
+       const response = await fetch(`${main_url}/available-data/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getAccessToken({navigateto})}`, // Include the access token in the Authorization header
+        },
+      });
+
+    return response
+  } catch (error) {
+    console.error('Error during fetchUserProfile:', error);
+  } finally {
+    //setLoading(false);
+
+    //return response
+}
+
+}
+
+
+
+
+export const setTransactionPin = async ({navigateto,accountPassword,pin2})=>{
+  //console.log('this fetch calll executeed')
+   try {
+    const response = await fetch(`${main_url}/set-transaction-pin/`, {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${getAccessToken({navigateto})}`, // Include the access token in the Authorization header
+     },
+     body: JSON.stringify({newpin:pin2, password:accountPassword }),
+
+   });
+
+ return response
+} catch (error) {
+ console.error('Error during fetchUserProfile:', error);
+} 
+}

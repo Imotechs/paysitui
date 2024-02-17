@@ -44,17 +44,7 @@ return (
             </li>
             <li className="nav-item active">
                <Link to='/login'  style={{"color": 'black'}} className="nav-link">Login</Link>
-            </li>
-           
-              <li className="nav-item active">
-               <Link to='/login'  style={{"color": 'black'}} className="nav-link">Pricing</Link>
-              </li>
-              <li className="nav-item active">
-               <Link to='/'  style={{"color": 'black'}} className="nav-link">Contact</Link>
-              </li>   
-              <li className="nav-item active">
-               <Link to='/dashboard'  style={{"color": 'black'}} className="nav-link">DashBoard</Link>
-              </li>               
+            </li>                        
           </ul>
 
           </div>

@@ -1,13 +1,13 @@
 
 import React from "react";
 import logo from '../../assets/images/paysit.png'  
-
+import { Link } from "react-router-dom";
 
 function Footer (){
 
     return (
-        <footer className="bg-brand-bg mt-20 pt-10 pb-2">
-        <div className="mx-3 md:mx-24 grid grid-cols-1 lg:grid-cols-5 gap-4">
+        <footer className="bg-brand-bg mt-5 pt-1 pb-2">
+        <div className="mx-3 row md:mx-24 grid grid-cols-1 lg:grid-cols-5 gap-12">
             <div className="flex flex-col space-y-2">
                 <a href="index.html#">
                     <span className="sr-only">PaysIt</span>
@@ -17,7 +17,7 @@ function Footer (){
                 <span className="text-sm font-medium text-white">support@paysit.com</span>
             </div>
             <div className="flex flex-col space-y-2">
-            	<div className="">
+            	<div className="col">
                     <span className="text-sm col font-medium text-white">Services</span>
                     <span className="text-sm col font-medium text-white">Data & Airtime</span>
                     <span className="text-sm col font-medium text-white">Electricity Bills</span>
@@ -25,8 +25,8 @@ function Footer (){
                     <span className="text-sm col font-medium text-white">Cable Subscription</span>
             	</div>
             </div>
-            <div className="flex flex-col space-y-2">
-            	<div className="">
+            <div className="  space-y-2">
+            	<div className="col">
                     <span className="text-sm font-medium text-white">Others</span>
                     <span className="text-sm font-medium text-white">Partner with Us</span>
                     <span className="text-sm font-medium text-white">FAQs</span>
