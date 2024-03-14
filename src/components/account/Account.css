@@ -2,3 +2,44 @@
     max-width: 400px;
     margin: auto;
 }
+
+.bal{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+}
+.bonus{
+    display: block;
+    margin-top: -7px;
+    padding-left: 15px;
+    color: rgb(36, 78, 203);}
+
+
+.convert{
+        margin-top: 117px;
+        margin-bottom: 70px;
+}
+.convertform input{
+width: 80%;
+margin-left: 10%;
+}
+.convertform button{
+    margin-left: 30%;
+}
+
+.refcode{
+    width: 100%;
+    display: inline;
+    margin: 0;
+}
+.convertbtn{
+    height: 20px;
+    width: 50px;
+    padding-left: 3px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding: 0px;
+    background-color: white;
+    display: block;
+    margin-left: 10px;
+    margin-top: 20px;
+}

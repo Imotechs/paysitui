@@ -455,4 +455,65 @@ p.signup a:hover {
   }
 }
 
+
+.verify{
+  margin-top: 290px;
+margin-bottom: 300px;
+}
+
+
+.verification-container {
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.support{
+  color: blue;
+  font-size: x-small;
+}
+.verifybtn{
+width: 80%;
+margin-left: 20px;
+color: white;
+border-color: rgba(255, 255, 255, 0.1);
+background: var(--primary-color)
+}
+.desc-txt{
+  margin: 30px;
+}
+.verification-container  {
+  color: #333;
+}
+
+.verification-container p {
+  line-height: 1.5;
+}
+
+.support-text{
+  font-size: xx-small;
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+.txt-email{
+  color: black;
+  font-weight: 400;
+}
+.phoneerror{
+  margin-left:70px;
+  color:brown;
+  font-size: xx-small;
+  padding-top: 20px;
+}
+.pd-btn{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.emailsuccess{
+  font-weight: 900;
+  font-size: x-large;
+}
 /*--//responsive--*/

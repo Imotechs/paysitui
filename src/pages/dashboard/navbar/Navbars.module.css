@@ -551,3 +551,14 @@ nav ul li{
     opacity: 0; /* Make it disappear */
   }
 
+.convertbtn{
+    height: 20px;
+    width: 50px;
+    padding-left: 3px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding: 0px;
+    background-color: white;
+    display: block;
+    margin-left: 40px;
+}

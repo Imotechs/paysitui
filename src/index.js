@@ -15,9 +15,10 @@ import Register from './pages/register/Register';
 import About from './pages/about/About';
 import Data from './components/data/Data';
 import PrivateRoute from './components/Privaterout';
+import PasswordReset from './pages/login/PasswordReset';
+import VerifyEmail from './pages/login/VerifyEmail';
 
-
-
+import TransferToWallet from './components/account/TransferToWallet';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,7 +31,16 @@ const router = createBrowserRouter([
   {
     path: "login",
     element: <Login/>,
+  },{
+    path: 'password-reset/',
+    element:<PasswordReset/>
   },
+
+  ,{
+    path: 'verify-email/',
+    element:<VerifyEmail/>
+  },
+
   {
     path: "about-us",
     element: <About/>,
@@ -42,9 +52,12 @@ const router = createBrowserRouter([
   {
     path: "dashboard/user-deposit",
     element: <PrivateRoute component={Deposit} />,
-  },
+  },{
+  path: "dashboard/user/account/",
+  element: <PrivateRoute component={TransferToWallet} />,
+},
   {
-    path: "dashboard/data/",
+    path: "dashboard/data/:service",
     element: <PrivateRoute component={Data}/>,
   },
 ]);

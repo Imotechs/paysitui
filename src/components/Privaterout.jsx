@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route, Navigate } from 'react-router-dom';
 import { main_url } from '../vitals';
+import parseJwt from '../vitals'
 
-export async function getToken() {
+async function getToken() {
   let accessToken = localStorage.getItem('access_token');
   const refreshToken = localStorage.getItem('refresh_token');
 
@@ -28,7 +29,6 @@ export async function getToken() {
           //navigateto('/login');
         }
       } catch (error) {
-        console.error('Error during token refresh:', error);
         // Handle refresh error, redirect to login
         //navigateto('/login');
       }

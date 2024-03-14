@@ -1,0 +1,43 @@
+
+
+.success{
+    background-color: green;
+    color: white;
+    font-weight: 600;
+    font-weight: 400;
+    border-radius: .3rem;
+    padding: 5px;
+    margin: 40px;
+    margin-left: 0px;;
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+.error{
+    background-color: brown;
+    color: white;
+    font-weight: 400;
+    border-radius: .3rem;
+    padding: 5px;
+    margin: 40px;
+    margin-left: 0px;;
+    animation: fadeIn 0.5s ease-in-out forwards;
+
+}
+
+@keyframes fadeIn {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+}
+
+.celeb{
+    
+    background-image:url('https://i.pinimg.com/originals/d0/09/67/d009678eb5b1658468704f51bfc11173.gif');
+     /* //url('https://i.gifer.com/4A5.gif'); */
+    background-repeat: no-repeat;
+    background-size: cover;
+}

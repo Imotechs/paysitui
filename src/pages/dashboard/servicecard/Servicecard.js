@@ -19,7 +19,7 @@ function Servicecard({account}){
             
                 <div className="row main-ft">
                     <div className="service">
-                    <Link to ="/dashboard/data"><span className="service-icon"><FontAwesomeIcon icon={faArrowsSpin} />
+                    <Link to ="/dashboard/data/data?service=data"><span className="service-icon"><FontAwesomeIcon icon={faArrowsSpin} />
                     <br/><i className="service-name">Data</i></span></Link>
                     </div>
                     
@@ -38,8 +38,8 @@ function Servicecard({account}){
                     <br/><i className="service-name">Electricity</i></span>
                     </div>
                     <div className="service">
-                    <span className="service-icon"><FontAwesomeIcon icon={faMobileScreenButton} />
-                    <br/><i className="service-name">Airtime</i></span>
+                    <Link to ="/dashboard/data/data?service=airtime"><FontAwesomeIcon icon={faMobileScreenButton} />
+                    <br/><i className="service-name">Airtime</i></Link>
                     </div>
                     <div className="service">
                     <span className="service-icon"><FontAwesomeIcon icon={faMobileScreenButton} />

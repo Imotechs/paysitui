@@ -14,7 +14,7 @@ import spectranet_logo from './assets/images/spectranet_logo.png'
 // import vtu from "./assets/images/vtu.jpg"
 
 export const main_url ='http://localhost:8000'
-
+export const frontEndUrl = 'http://localhost:3000'
 
 export default function nameToLogo(name){
     name = name.toLowerCase()
@@ -80,21 +80,22 @@ export function validatePhoneNumber(phoneNumber){
 
 
 }
+
 // Helper function to decode JWT tokens
-const parseJwt = (token) => {
+export const parseJwt = (token) => {
+  //console.log('toooooken::',token)
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`).join(''));
   return JSON.parse(jsonPayload);
 };
 
-export async function getAccessToken({ navigateto }) {
-  let accessToken = localStorage.getItem('access_token');
+export async function getAccessToken({ navigateto=null }={}) {
+  let accessToken =  localStorage.getItem('access_token');
   const refreshToken = localStorage.getItem('refresh_token');
 
-  if (accessToken) {
+  if (accessToken !== undefined && accessToken !== null) {
     const decodedToken = parseJwt(accessToken);
-
     if (decodedToken.exp * 1000 < Date.now()) {
       // Token has expired, try to refresh
       try {
@@ -108,26 +109,51 @@ export async function getAccessToken({ navigateto }) {
 
         if (refreshResponse.ok) {
           const newAccessToken = await refreshResponse.json();
-          localStorage.setItem('access_token', newAccessToken.access_token);
-          accessToken = newAccessToken.access_token;
+          //console.log(newAccessToken)
+          localStorage.setItem('access_token', newAccessToken.access);
+          accessToken = newAccessToken.access;
         } else {
           // Refresh failed, redirect to login
-          navigateto('/login');
+          if (navigateto !== null){
+            navigateto('/login');
+            return
+          }
         }
       } catch (error) {
         console.error('Error during token refresh:', error);
         // Handle refresh error, redirect to login
-        navigateto('/login');
+        //window.location.href ='/login'
       }
     }
 
     return accessToken;
   } else {
     // No access token found, redirect to login
-    navigateto('/login');
-  }
+    if (navigateto !== null){
+      navigateto('/login');
+      return
+    } 
+   }
 }
  
+const useToken =  await getAccessToken()
+
+export async function registerUser({user}) {
+  try {
+    const response = await fetch(`${main_url}/register/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({data:user}),
+    });
+    
+  return   response
+  } 
+  catch (error) {
+    console.error('Error during login:', error);
+  }
+}
 
 export async function handleLogin({userName,password}) {
   try {
@@ -142,27 +168,83 @@ export async function handleLogin({userName,password}) {
   return response
   } 
   catch (error) {
-    //console.error('Error during login:', error);
+    console.error('Error during login:', error);
   }
 }
 
 
+export async function PasswordChangeRequest({userEmail}) {
+  try {
+    const response = await fetch(`${main_url}/password/request/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({email:userEmail}),
+    });
+    
+  return response
+  } 
+  catch (error) {
+    console.error('Error during login:', error);
+  }
+}
 
 
-
+export async function PasswordSetRequest({password2,uid,confirmation_token}) {
+  try {
+    const response = await fetch(`${main_url}/password/change/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({password:password2,uidb64:uid,token:confirmation_token}),
+    });
+    
+  return response
+  } 
+  catch (error) {
+    console.error('Error during login:', error);
+  }
+}
+//verifyAccountByEmailLink
+export async function verifyAccountByEmailLink({uid,confirmation_token}) {
+  try {
+    const response = await fetch(`${main_url}/verify-email/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({uidb64:uid,token:confirmation_token}),
+    });
+    
+  return response
+  } 
+  catch (error) {
+    console.error('Error during login:', error);
+  }
+}
 
 export const fetchUserProfile = async ({navigateto}) => {
+  const accessToken = await getAccessToken({ navigateto });
+
     try {
        const response = await fetch(`${main_url}/user-profile/`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${getAccessToken({navigateto})}`,         },
+          'Authorization': `Bearer ${accessToken}`, }
       });
-
-    return response
+      //const userData = await response.json();
+      if(response.ok){
+        return response
+      }else{
+        navigateto('/')
+      }    
     } catch (error) {
       console.error('Error during  the fetchUserProfile:', error);
+      navigateto('/')
+
     } finally {
       //setLoading(false);
 
@@ -174,13 +256,39 @@ export const fetchUserProfile = async ({navigateto}) => {
   //fetchUserProfile()
 
 export const fetchData =async(navigateto)=>{
+  const accessToken = await getAccessToken({ navigateto });
   try {
        const response = await fetch(`${main_url}/available-data/`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${getAccessToken({navigateto})}`, // Include the access token in the Authorization header
+          'Authorization': `Bearer ${accessToken}`, // Include the access token in the Authorization header
         },
+      });
+
+    return response
+
+  } catch (error) {
+    console.error('Error during fetchUserProfile:', error);
+    //navigateto('/')
+
+  } 
+
+}
+
+
+
+export const buyData =async({navigateto,selectedPlan,amount,phoneNumber,optionSelected})=>{
+  const accessToken = await getAccessToken({ navigateto });
+  try {
+       const response = await fetch(`${main_url}/available-data/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`, // Include the access token in the Authorization header
+        },
+        body: JSON.stringify({plan:selectedPlan,amount:amount,phone:phoneNumber,choice:optionSelected}),
+
       });
 
     return response
@@ -196,15 +304,15 @@ export const fetchData =async(navigateto)=>{
 
 
 
-
 export const setTransactionPin = async ({navigateto,accountPassword,pin2})=>{
   //console.log('this fetch calll executeed')
+  const AccesToken = await getAccessToken({navigateto})
    try {
     const response = await fetch(`${main_url}/set-transaction-pin/`, {
      method: 'POST',
      headers: {
        'Content-Type': 'application/json',
-       'Authorization': `Bearer ${getAccessToken({navigateto})}`, // Include the access token in the Authorization header
+       'Authorization': `Bearer ${AccesToken}`, // Include the access token in the Authorization header
      },
      body: JSON.stringify({newpin:pin2, password:accountPassword }),
 
@@ -213,5 +321,76 @@ export const setTransactionPin = async ({navigateto,accountPassword,pin2})=>{
  return response
 } catch (error) {
  console.error('Error during fetchUserProfile:', error);
+} 
+}
+
+//
+
+export const initiatePayment = async ({navigateto,amount})=>{
+  //console.log('this fetch calll executeed')
+  const accessToken = await getAccessToken({navigateto})
+   try {
+    const response = await fetch(`${main_url}/payment/init/`, {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${accessToken}`, // Include the access token in the Authorization header
+     },
+     body: JSON.stringify({amount:amount}),
+
+   });
+
+ return response
+} catch (error) {
+ //console.error('Error during fetchUserProfile:', error);
+} 
+}
+
+
+
+
+export const verifyPayment =  async({navigateto,data})=>{
+  //console.log('this fetch calll executeed')
+ const  accessToken = getAccessToken({navigateto})
+   try {
+    const response =  fetch(`${main_url}/payment/init/`, {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${useToken}`, // Include the access token in the Authorization header
+     },
+     body: JSON.stringify(data),
+
+   });
+
+ return  await response
+
+} catch (error) {
+ //console.error('Error during fetchUserProfile:', error);
+} 
+}
+
+//convert/commission/
+
+
+
+export const convertCommision =  async({navigateto,amount})=>{
+  //console.log('this fetch calll executeed')
+ const  accessToken = getAccessToken({navigateto})
+   try {
+    const response =  fetch(`${main_url}/convert/commission/`, {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${useToken}`, // Include the access token in the Authorization header
+     },
+     body: JSON.stringify({amount:amount}),
+
+   });
+
+ return  await response
+
+} catch (error) {
+ //console.error('Error during fetchUserProfile:', error);
 } 
 }

@@ -1,5 +1,5 @@
 
-import React,{useContext, useState} from "react"
+import React,{useContext, useEffect, useState} from "react"
 import styles from '../Navbars.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faTv ,
@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 // ]
 export default function Aside({isToggled}){
 	// const[loading,setLoading] = useState(false)
+	let [username,setUsername] =useState('')
 	const{user,loading,setLoading} = useContext(userProfileContext)
 	const navigateto = useNavigate()
 	const balance = user.wallet_balance
@@ -19,7 +20,9 @@ export default function Aside({isToggled}){
 		// Format the amount as Nigerian Naira
 		const walletBalance = new Intl.NumberFormat('en-NG', {style: 'currency',currency: 'NGN',}).format(balance);
 		const walletBonus = new Intl.NumberFormat('en-NG', {style: 'currency',currency: 'NGN',}).format(bonus);
-	
+	useEffect(()=>{
+		setUsername(user.username)
+	})
 	function handleLogout(){
 		localStorage.removeItem('access_token');
 		localStorage.removeItem('refresh_token');
@@ -40,7 +43,9 @@ export default function Aside({isToggled}){
 			<div className={styles['sidebar-ontent']}>
 				<div className={styles['sidebar-user']}>
 				<Link to="/dashboard/user-deposit"><button className={styles['topup']}>::</button></Link>
-                <div  className={styles['font-weight-bold']} style={{'color':'brown', 'fontSize':'16px'}}>{user.username}</div>
+                <div  className={styles['font-weight-bold']} style={{'color':'brown', 'fontSize':'16px'}}>
+				 
+				{username}</div>
 
                     <div className={styles['row']}>
                     <div className={styles['col']}>
@@ -50,7 +55,12 @@ export default function Aside({isToggled}){
                     <div className={styles['col']}>
                     <div  className={styles['font-weight-bold']}>Commissions</div>
 					<small >{walletBonus}</small>
-                    </div>
+					<small>
+					<small>
+						<Link to ='/dashboard/user/account/'><button className={`border-block ${styles['convertbtn']}`}>Checkout</button>
+						</Link>
+						</small>
+                    </small></div>
 
                     </div>
 					
@@ -72,7 +82,7 @@ export default function Aside({isToggled}){
 						Our Services
 					</li>
 					<li className={styles['sidebar-item']}>
-						<Link to="/dashboard/data" className= {styles['sidebar-link']}>
+					<Link to ="/dashboard/data/data?service=data" className= {styles['sidebar-link']}>
 						<FontAwesomeIcon icon={faArrowsSpin} className= {`${styles['align-middle']} ${styles['mr-2']} ${styles['fa']} ${styles['fa-wifi']}`}/> <span className={styles["align-middle"]}>Buy Data</span>
 						</Link>
 					</li>
@@ -88,9 +98,9 @@ export default function Aside({isToggled}){
 					</li>
 					
 					<li className={styles['sidebar-item']}>
-						<a href="/" className={styles['sidebar-link']}>
+					<Link to ="/dashboard/data/data?service=airtime"className={styles['sidebar-link']}>
 						<FontAwesomeIcon icon={faMobileScreenButton} className= {`${styles['align-middle']} ${styles['mr-2']} ${styles['fa']} ${styles['fa-wifi']}`}/>  <span className={styles["align-middle"]}>Airtime VTU</span>
-						</a>
+						</Link>
 					</li>
 					
 					<li className={styles['sidebar-item']}>

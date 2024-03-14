@@ -7,7 +7,10 @@ import Footer from '../footer/Footer';
 import Account from '../../../components/account/account';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserProfile } from '../../../vitals';
-
+import Payment from '../../../components/payment/Payment';
+import CoverPreloader from '../../../components/preloader/Coverpreloader';
+import { initiatePayment } from '../../../vitals';
+import Preloader from '../../../components/preloader/Preloader';
 // Importing handleCopyClick is not necessary since the function is defined locally
 // Remove the import statement for handleCopyClick
 
@@ -15,12 +18,14 @@ export default function Deposit(props) {
   const [isCopied, setIsCopied] = useState(false);
   const [amount,setAmount] = useState('')
   const [amountIsValid,setAmountIsValid] = useState(false)
-  const [showCards, setShowCards] = useState(true);
-  const [showPaymentInput, setShowPaymentInput] = useState(false);
+  const [showCards, setShowCards] = useState(false);
+  const [showPaymentInput, setShowPaymentInput] = useState(true);
   const [loading,setLoading] = useState(false)
  const[user,setUser] = useState({})
  const navigateto = useNavigate()
  const [textToCopy, setTextToCopy] = useState(''); // Initialize with default value
+  const [payment,setPayment] = useState(false)
+  const [transaction,setTransaction] = useState('')
 
   //console.log(user.account_number)
 
@@ -65,8 +70,7 @@ export default function Deposit(props) {
       try {
         setLoading(true);
   
-        const response= await fetchUserProfile(navigateto)
-  
+        const response= await fetchUserProfile({navigateto})
         if (response.ok) {
           const userData = await response.json();
           setUser(userData);
@@ -84,6 +88,29 @@ export default function Deposit(props) {
 
   },[] )
 
+   function callPayment(){
+    setLoading(true)
+    async function placePayment(){
+
+      try{
+        const response = await initiatePayment({navigateto,amount})
+        const data = await response.json()
+        if (response.ok){
+          setLoading(false)
+          setTransaction(data)
+          setPayment(true)
+          console.log(data)
+
+        }else{
+          setLoading(false)
+        }
+      }catch(e){
+  
+      }
+    }
+    placePayment()
+
+  }
  
 
   return (
@@ -100,7 +127,7 @@ export default function Deposit(props) {
             </div>
             <div className='col'>
               <button className={`btn btn-warning ${showPaymentInput ? 'active' : ''}`} onClick={handleATMButtonClick}>
-                ATM-Card <small>(Online Funding)</small>
+                Online <small>(Card/other Options)</small>
               </button>
             </div>
           </div>
@@ -117,7 +144,7 @@ export default function Deposit(props) {
               <p className='bank'>{user.bank_name}</p>
               <div className='card-foot'>
                 <p>Account Number</p>
-                <p className='account-no'>{user.account_number}</p>
+                <p className='account-no' style={{color:'brown'}}>Comming Up!... <Preloader loading={true}isok={false} style={{color:'brown'}}></Preloader></p>
                 <div>
                   {isCopied ? (
                     <>
@@ -131,48 +158,57 @@ export default function Deposit(props) {
                 </div>
               </div>
             </div>
+
           </div>
+          {loading? <CoverPreloader loading={loading} ></CoverPreloader>:''}
+
           <div className='desc'>
                         <ol>
-                            <li> Coppy your account Number Above</li>
+                            <li> Coppy your personalized account Number Above if its Available</li>
                             <li>Use any Bank of your choice and transfer the Amount you want to fund your wallet
                                 (this can be any Bank including Mobile Banking App and USSD).
                             </li>
 
                             <li>Your PaysIt wallet will be funded Once the payment is completed by your Bank</li>
-                            <p>This process is Automatic and takes just a Minute</p>
-                        </ol>
+                           <i> <p>Your profile may be in review before you are assigned a personalized Account number for offline transactions;</p>
+                            <p>Go ahead and use the Online Option, every process is automated and quick so you dont have to Worry.</p>
+                            </i>
+                            </ol>
             </div>
         </div>
         )}
-
-        {showPaymentInput && (
-            <div style={{'marginTop':'110px'}}>
-            <div className='desc'>
-                <p> By using your ATM card to fund your wallet. MasterCard, VisaCard and Verve card are acceptable. 
-                    Your wallet will be automatically credited as soon as the payment is successful</p>
-           
-          <div className="payment-input" style={{'height':'30vh'}}>
-            <div className="input-group">
-                <input type="number" name="amount" 
-                placeholder="₦" value={amount} onChange={handleChange}
-               
-                >
-                
-                </input> <br/>
-                {amountIsValid && (
-                    <button type="submit" className='btn-primary' >Add Funds</button>
-                )}
-                 {!amountIsValid && (
-                    <button type="submit" className='btn-primary disabled' >Enter Amount</button>
-                )}
-                
-                    
-                </div>
-          </div>
-          </div>
-          </div>
+{payment? (<Payment amount={amount} transaction = {transaction}/>):(<>
+  {showPaymentInput && (
+    <div style={{'marginTop':'110px'}}>
+    <div className='desc'>
+      <b>With a lot of options including a PaysIt temporally account for your one time transaction</b>
+      
+        <p> Also By using your ATM-card; MasterCard, VisaCard and Verve card are acceptable. 
+            Your wallet will be automatically credited as soon as the process is completed</p>
+            Always consider clicking the <b>Change payent method</b> for more options
+  <div className="payment-input" style={{'height':'30vh'}}>
+    <div className="input-group">
+        <input type="number" name="amount" 
+        placeholder="₦" value={amount} onChange={handleChange}
+       
+        >
+        
+        </input> <br/>
+        {amountIsValid && (
+            <button type="submit" className='btn-primary'  onClick={callPayment}>Add Funds</button>
         )}
+         {!amountIsValid && (
+            <button type="submit" className='btn-primary disabled' >Enter Amount</button>
+        )}
+        
+            
+        </div>
+  </div>
+  </div>
+  </div>
+)}
+</>)}
+        
       </div>
       <Footer />
     </div>

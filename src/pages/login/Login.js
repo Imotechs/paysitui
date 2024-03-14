@@ -7,14 +7,18 @@ import { Link } from 'react-router-dom';
 import { handleLogin } from '../../vitals';
 
 import Preloader from '../../components/preloader/Preloader';
+import CoverPreloader from '../../components/preloader/Coverpreloader';
 import { useNavigate } from 'react-router-dom';
+import { PasswordChangeRequest } from '../../vitals';
 function Login() {
 	const [userName, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 	const[loading,setLoading] = useState(false)
 	const[isok,setIsOk] = useState(false)
 	const [error,setError] = useState('')
-
+	const [passwordChange,setPasswordChange] =useState(false)
+	const [userEmail,setUserEmail] = useState('')
+	const [responseMessage,setResponseMessage] = useState('')
 	const navigateto = useNavigate()
 
 	function handleUsernameChange(e){
@@ -30,8 +34,8 @@ function Login() {
 	  
 		try {
 		 const response = await handleLogin({userName,password});
-		 if (response.ok) {
-			const data = await response.json();
+		 const data = await response.json()
+		 if (response.ok && data.access != undefined) {
 			localStorage.setItem('access_token', data.access);
 			localStorage.setItem('refresh_token', data.refresh);
 		   setLoading(false)
@@ -42,13 +46,14 @@ function Login() {
 		   else {
 		   setLoading(false)
 		   setIsOk(false)
-		   setError('Invalid login Details')
+		   setError(data.error)
 		   setPassword('')
 		   }
 		} catch(error){
 			setLoading(false)
+			console.log(error)
 			setIsOk(false)
-			setError('Error')
+			setError('Error Occur')
 			setPassword('')
 
 
@@ -56,12 +61,56 @@ function Login() {
 	  }
 	  
 	  
+	function setPasswordDiv(){
+		setLoading(true)
+		setTimeout(()=>{
+			setPasswordChange(true)
+			setLoading(false)
+		},3000)
+	}
 	  
-	  
-	
+	function handleUserEmailChange(e){
+		setUserEmail(e.target.value);
+
+	}
+	async function submitPassForm(e){
+		e.preventDefault()
+		setLoading(true)
+		try{
+			const response = await PasswordChangeRequest({userEmail})
+				const data = await response.json()
+				setResponseMessage(data['message'])
+		}catch(e){
+			console.log(e)
+		} finally{
+			setLoading(false)
+		}
+		
+
+	}
   return (
     <div className="login">
       <Header/>
+	  {passwordChange ? (
+                <div className="verify">
+                   <div className="verification-container">
+    <h2>Request New Password </h2>
+	<form onSubmit={submitPassForm}>
+    <p className="desc-txt">To get new login password, <b>PaysIt</b> will send you a reset link via the Email you will provide below:
+	<br/><b className="support">{userEmail}</b></p>
+	<Preloader loading={loading} isok={isok}/><b className="support">{responseMessage}</b>
+		<div className="form-input">
+		<span className="fa fa-user" aria-hidden="true"></span> 
+              <input type="text" name="email"
+								placeholder="Email"  value={userEmail} required onChange={handleUserEmailChange} />
+						</div>
+         <button className="verifybtn btn text-brand px-5 border-[1.2px] border-block lift me-1" type='submit'>Request pasword Change</button>
+		</form>
+    <p className="support-text">Need help? <b className="support">Contact Customer Support </b> @<a mailto ='paysit.info@gmail.com' className="txt-email">paysit.info@gmail.com</a></p>
+</div> 
+                </div>
+            ):(
+
   <section className="w3l-form-36">
 		<div className="form-36-mian section-gap">
 			<div className="wrapper">
@@ -69,7 +118,7 @@ function Login() {
 				<div className="form-inner-cont">
 				{/* <img src={logo} alt="Logo" style={{width:'50px', height:'50px'}}/> */}
 				<h3>Login</h3>
-	<Preloader loading={loading} isok={isok}/>
+	<CoverPreloader loading={loading} isok={isok}/>
 	{!loading && error && <p style={{marginLeft:'70px',color:'brown',}}>{error}</p>}
 	<form method="POST" autoComplete="off" className="signin-form" onSubmit={submitForm}>
 											<div className="form-input">
@@ -94,7 +143,7 @@ function Login() {
         						
 						</div>
 						<div className="new-signup">
-							<Link to="/sign_up" className="signuplink" >Forgot password?</Link>
+							<b  className="signuplink border-block pd-btn" onClick={setPasswordDiv}>Forgot password?</b>
 						</div>
 					</form>
 
@@ -111,7 +160,10 @@ function Login() {
 				</div>
 			</div>
 		</div>
-	</section>    </div>
+	</section> 
+	)}
+	
+	</div>
   );
 }
 

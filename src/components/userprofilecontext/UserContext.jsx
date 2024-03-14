@@ -17,15 +17,13 @@ const UserProfileProvider = ({ children }) => {
         if (response.ok) {
           const data = await response.json();
           setUser(data);
-          setLoading(false)
 
-        } else {
-          console.error('Failed to fetch user profile:', response.status);
-          setLoading(false)
-        }
+        } 
         
       }catch(e){
         console.error(e)
+
+      }finally{
         setLoading(false)
 
       }

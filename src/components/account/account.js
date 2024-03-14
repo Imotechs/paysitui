@@ -23,20 +23,20 @@ const Account =()=>{
     const getData =async()=>{
       try{
         const response = await fetchUserProfile({navigateto})
-        console.log(response)
+        //console.log(response)
         if (response.ok) {
           const data = await response.json();
           setUser(data);
           setLoading(false)
-          console.log(data)
+          //console.log(data)
 
         } else {
-          console.error('Failed to fetch user profile:', response.status);
+          //console.error('Failed to fetch user profile:', response.status);
           setLoading(false)
         }
         
       }catch(e){
-        console.error(e)
+        //console.error(e)
         setLoading(false)
       }
 
@@ -50,13 +50,21 @@ const Account =()=>{
                 <div className="col">
                     <div className="head">
                         <p>Balance</p>
-                        <p className="bal"> <b>{walletBalance}</b></p>
+                        <p className="bal"> <b style={{paddingBottom:'0px'}}>{walletBalance}</b> 
+                        <p/><small className='bonus'>
+                          +{walletBonus} <small>Commission</small>
+                          </small></p>
                     </div>
                 </div>
                 <div className="col">
                     <Link to='/dashboard/user-deposit'><button>+Deposit</button></Link>
+                    <small>
+					<small>
+						<Link to ='/dashboard/user/account/'><button className='border-block convertbtn'>Checkout</button>
+						</Link>
+						</small>
+                    </small>
                 </div>
-
             </div>
         <hr/>
         <div className=" row items">

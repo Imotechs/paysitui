@@ -133,7 +133,7 @@ function handlePassChange(e){
           setLoading(false)
           setError('OK')
           onClose()
-          window.location.reload()
+          //window.location.reload()
         } 
         else if(response.status ===400){
           setError('Password not correct')
