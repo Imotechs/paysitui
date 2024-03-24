@@ -4,7 +4,7 @@ import './Message.css'; // Import your custom styles
 import CoverPreloader from '../preloader/Coverpreloader';
 import PassPreloader from '../preloader/PassPreloader';
 import { useNavigate } from 'react-router-dom';
-
+import ErrorBoundary from '../404/ErrorCatcher';
 
  const Message =({message,onClose,isOpen})=>{
     const messageTag = (
@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
     );
     
     return (
+      <ErrorBoundary>
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
@@ -30,6 +31,7 @@ import { useNavigate } from 'react-router-dom';
       </div>
 
     </Modal>
+    </ErrorBoundary>
   );
 
 };

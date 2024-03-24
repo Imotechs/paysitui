@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import './Passcode.css'; // Import your custom styles
 import CoverPreloader from '../preloader/Coverpreloader';
 import PassPreloader from '../preloader/PassPreloader';
+import Preloader from '../preloader/Preloader';
 import { setTransactionPin } from '../../vitals';
 import { useNavigate } from 'react-router-dom';
 
@@ -37,7 +38,7 @@ const PassCode = ({ isOpen, onClose, onContinue,user }) => {
       } 
       else {
         setIsValid(true)
-        console.log('PINs match:', newPin, userPin);
+        //console.log('PINs match:', newPin, userPin);
         setError('')
         //onClose()
         //setIsValid(true);
@@ -140,7 +141,7 @@ function handlePassChange(e){
           setLoading(false)
         }
         else {
-          console.error('Failed to fetch user profile:', response.status);
+          //console.error('Failed to fetch user profile:', response.status);
           setLoading(false)
           setError('Something went wrong')
         }

@@ -1,5 +1,5 @@
 import Header from "../../components/header/Header"
-import logo from '../../assets/images/paysit_logo.png'
+import logo from '../../assets/images/paysit.png'
 import Footer from "../dashboard/footer/Footer"
 import { Link } from "react-router-dom"
 export default function About(){
@@ -10,11 +10,9 @@ export default function About(){
     <div className="midd-w3 py-5">
         <div className="container py-lg-5 py-md-4 py-2">
             <div className="row">
-                <div className="col-lg-6 left-wthree-img">
-                    <div className="position-relative">
-                        <img src={logo} alt="" className="img-fluid radius-image-full"/>
+                <div className="col-lg-6">
+                        <img src={logo} alt="" className="" style={{marginTop:'100px',height:'300px',width:'270px'}}/>
                   
-                    </div>
                 </div>
                 <div className="col-lg-6 mt-lg-0 mt-5 about-right-faq align-self">
                     <h5 className="title-big">About Us</h5>

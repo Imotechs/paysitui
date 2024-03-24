@@ -7,7 +7,7 @@ import Header from "./navbar/header/Header";
 import Footer from "./footer/Footer";
 import nameToLogo from "../../vitals";
 import { UserProfileProvider } from "../../components/userprofilecontext/UserContext";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function DashBoard(){
 	const navigateto = useNavigate()
@@ -31,6 +31,8 @@ function DashBoard(){
 			<Transactions />
 		</div>
 		</UserProfileProvider>
+		<Link to="https://wa.me/message/DHCVWD7K25CWB1" className="whatsapbtn">
+        Chat us(we reply in less than 1Min)</Link>
 		<Footer/>
 	</div>
     );

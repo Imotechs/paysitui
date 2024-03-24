@@ -68,18 +68,23 @@ const Account =()=>{
             </div>
         <hr/>
         <div className=" row items">
-                <div className="col withdrow">
+                <Link to='/dashboard/user-withdraw/' className='custom-link '><div className="col withdrow">
                 <FontAwesomeIcon icon={faBank}/>
                 <p>Withdraw</p>
+                </div></Link>
+                <div className='col dashbord'>
+                <Link to ='/dashboard/user-deposit/' className='custom-link '>
+                <i className="align-middle mr-2 fa fa-id-card"></i> 
+                <p>Deposit</p></Link>
                 </div>
                 <div className='col dashbord'>
-                <Link to ='/dashboard'><FontAwesomeIcon icon={faEthernet}/>
+                <Link to ='/dashboard' className='custom-link '><FontAwesomeIcon icon={faEthernet}/>
                 <p>DashBoard</p></Link>
                 </div>
-                <div className='col dashbord'>
+                <Link to="https://wa.me/message/DHCVWD7K25CWB1" className='custom-link '><div className='col dashbord'>
                 <FontAwesomeIcon icon={faMessage}/>
                 <p>Support</p>
-                </div>
+                </div></Link>
             </div>
             {loading &&<CoverPreloader loading={loading} isok={false}/>}
 

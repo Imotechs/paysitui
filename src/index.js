@@ -17,13 +17,16 @@ import Data from './components/data/Data';
 import PrivateRoute from './components/Privaterout';
 import PasswordReset from './pages/login/PasswordReset';
 import VerifyEmail from './pages/login/VerifyEmail';
-
+import Withdraw from './pages/dashboard/deposit/Withdraw';
+import Tv from './components/tv/Tv';
 import TransferToWallet from './components/account/TransferToWallet';
+import Error404 from './components/404/404';
+import ErrorBoundary from './components/404/ErrorCatcher';
+import Electricity from './components/electricity/Electricity';
+import Epins from './components/epins/Epins';
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
+  {path: "/",element: <App />,},
+  { path: '*', element: <Error404 />, }, 
   {
     path: "sign-up",
     element: <Register/>,
@@ -33,12 +36,12 @@ const router = createBrowserRouter([
     element: <Login/>,
   },{
     path: 'password-reset/',
-    element:<PasswordReset/>
+    element:<PasswordReset/>,
   },
 
-  ,{
+  {
     path: 'verify-email/',
-    element:<VerifyEmail/>
+    element:<VerifyEmail/>,
   },
 
   {
@@ -52,9 +55,26 @@ const router = createBrowserRouter([
   {
     path: "dashboard/user-deposit",
     element: <PrivateRoute component={Deposit} />,
-  },{
+  },  
+  {
+    path: "dashboard/tv/service/",
+    element: <PrivateRoute component={Tv} />,
+  },    
+  {
+    path: "dashboard/electricity/bills/",
+    element: <PrivateRoute component={Electricity} />,
+  }, 
+  {
+    path: "dashboard/epins/",
+    element: <PrivateRoute component={Epins} />,
+  },
+  {
+    path: "dashboard/user-withdraw",
+    element: <PrivateRoute component={Withdraw} />,
+  },
+  {
   path: "dashboard/user/account/",
-  element: <PrivateRoute component={TransferToWallet} />,
+  element: <PrivateRoute component={TransferToWallet}/>,
 },
   {
     path: "dashboard/data/:service",
@@ -65,12 +85,10 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ErrorBoundary>
     <RouterProvider router={router} />
+    </ErrorBoundary>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-// Replace '#root' with the ID of your root element

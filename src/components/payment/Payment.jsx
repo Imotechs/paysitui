@@ -7,7 +7,6 @@ import Message from '../message/Message';
 import { useNavigate } from 'react-router-dom';
 
 export default function Payment({amount,transaction}) {
-    const [loading,setLoading] = useState(false)
     const [message, setMessage] = useState('')
     const [messageIsOpen,setMessageIsOpen] = useState(false)
     const navigateto = useNavigate()
@@ -46,7 +45,7 @@ export default function Payment({amount,transaction}) {
       tx_ref: transaction.payment_id,
       amount: transaction.amount,
       currency: "NGN",
-      payment_options: "card, banktransfer, ussd",
+      payment_options: "banktransfer,card, ussd",
       meta: {
         source: "docs-inline-test",
         consumer_mac: "92a3-912ba-1192a",
@@ -62,30 +61,26 @@ export default function Payment({amount,transaction}) {
         logo:image_logo,
       },
       callback: async function (data){
-        //console.log('call back here poooooo',data)
         data['payment_id'] =data['tx_ref']
         const response = await verifyPayment({navigateto,data})
          const resData = await response.json()
-         console.log(resData)
-         console.log(data)
-         console.log(transaction)
-         //setMessage(resData['message'])
-         //setMessageIsOpen(true)
+         console.log('response..',resData)
+         if(resData['message']){
+          setMessage(resData['message'])
+          setMessageIsOpen(true)}
              },
       onclose: async function () {
        
         let data = transaction
             data['status'] = 'canceled'
          const response = await verifyPayment({navigateto,data})
-         const resData = await response.json()
-        setMessage(resData['message'])
-         setMessageIsOpen(true)
+         //const resData = await response.json()
+      
          
 
       }
     });
   }
-  //console.log(transaction)
 function closeMessage(){
 setMessageIsOpen(false)
 setTimeout(()=>{

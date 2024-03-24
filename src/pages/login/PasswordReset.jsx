@@ -51,7 +51,7 @@ export default function PasswordReset (){
         setError('')
         setPassword2(pass2)
         if (pass2.length >=password1.length){
-            if(pass2 != password1){
+            if(pass2 !== password1){
                 if ('vibrate' in navigator) {
                     navigator.vibrate([200, 100, 200]);
                   }

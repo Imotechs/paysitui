@@ -1,0 +1,94 @@
+/* Styling for the ecard-body */
+.ecard-body {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light gray background */
+    border: 1px solid #dee2e6; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    min-height: 80vh;
+  }
+  
+  /* Styling for the images within custom controls */
+  .custom-control img {
+    margin-right: 5px; /* Space between image and label */
+  }
+  
+  /* Styling for the form */
+  .electricform {
+    margin-top: 20px; /* Spacing from previous element */
+  }
+  .tv-form select {
+    height: 50px;
+  }
+  /* Styling for the form inputs */
+  .form-control {
+    margin-bottom: 15px; /* Spacing between form controls */
+  }
+  
+  /* Styling for the 'Proceed' button */
+  #btnelectric {
+    width: 150px; /* Set button width */
+  }
+  
+  /* Additional styling for responsiveness */
+  @media (max-width: 768px) {
+    .select2-container {
+      width: 100% !important; /* Make select dropdowns full width */
+    }
+  }
+  
+
+  
+  /* Styling for hover effect */
+  .custom-control img:hover {
+    border-color: #e3d213; /* Change border color on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+
+  .tv-form input{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+  }
+
+@media(max-width:800px){
+    .electacc{
+        display: none;
+        margin-left: 40px;
+    }
+}
+
+
+.electricity-icons{
+    max-height: 200px;
+}
+
+.electricity-icons img {
+    width: 80px; /* Set the width of the images */
+    height: auto; /* Maintain aspect ratio */
+    position: relative;
+    border-radius: 50%;
+    border: 2px solid rgb(0, 170, 255);
+    box-shadow: 0.8px 0.8px 1px 1px;
+    width: 35px;
+    aspect-ratio: auto 35 / 30;
+    height: 30px;
+  }
+
+  .electricity-icons .custom-control{
+width: 100%;
+}
+
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spinner{
+  display: inline-block;
+  animation: spin 2s linear infinite; /* Adjust the duration and timing function as needed */
+}

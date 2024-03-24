@@ -44,11 +44,7 @@ th, td {
     font-size: 10px;
 
   }
-  .tablebody td img{
  
-    width: 20px;
-    height: 20px;
-  }
 
   .tablebody tr{
     border-bottom: 0px;
@@ -112,4 +108,22 @@ color: black;
 width: 80%;
 border-top-right-radius: 2rem;
 border-bottom-right-radius: 2rem;
+}
+.imgtd{
+  width: 48px;
+  display: flex;
+  position: relative;
+}
+.txntable{
+  overflow: auto; /* or overflow: scroll; */
+
+}
+.tablebd{
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .table {
+    width:100%;
+  }
 }

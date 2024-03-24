@@ -215,7 +215,7 @@ function App() {
         <div className="container py-lg-5 py-md-4 py-2" >
             <div className="row main-cont-wthree-2 align-items-center">
                 <div className="col-lg-6 feature-grid-left pr-lg-5">
-                    <h5 className="title-small">Our Hooks</h5>
+                    <h5 className="title-small" style={{'color':'#0ba254'}}>Our Hooks</h5>
                     <h3 className="title-big mb-4">Connect with us through several hooks</h3>
                     <p className="text-para">We have several channels you can choose to connect and make transactions on our platform, from our Website to Mobile App, API, USSD, SMS and our Powerful Whatsapp Bot.</p>
                 
@@ -229,27 +229,27 @@ function App() {
                             <div className="icon">
                                 <i className="fa fa-globe" style={{'fontSize': '35px', 'color':'#0ba254'}}></i>
                             </div>
-                            <h4><a href="index.html#" className="title-head">Website</a></h4>
+                            <h4><a href="#" className="title-head">Website</a></h4>
                         </div>
                         <div className="grids-1 box-wrap">
                             <div className="icon">
                                 <i className="fa fa-mobile" style={{'fontSize': '35px', 'color':'#0ba254'}}></i>
                             </div>
-                            <h4><a href="index.html#" className="title-head">Mobile App</a></h4>
+                            <h4><a href="#" className="title-head">Mobile App</a></h4>
                         </div>
                         
                         <div className="grids-1 box-wrap">
                             <div className="icon">
                                 <i className="fa fa-envelope-o" style={{'fontSize': '35px', 'color':'#0ba254'}}></i>
                             </div>
-                            <h4><a href="index.html#" className="title-head">USSD</a></h4>
+                            <h4><a href="#" className="title-head">USSD</a></h4>
                         </div>  
                         
                         <div className="grids-1 box-wrap">
                             <div className="icon">
                                 <i className="fa fa-whatsapp" style={{'fontSize': '35px', 'color':'#0ba254'}}></i>
                             </div>
-                            <h4><a href="index.html#" className="title-head">Whatsapp</a></h4>
+                            <h4><a href="#" className="title-head">Whatsapp</a></h4>
                         </div>                      
                     </div>
                 </div>
@@ -308,11 +308,11 @@ function App() {
 
         </div>
 
-        <div className="flex justify-center items-center text-center text-md-start mt-10">
-            <Link href="/login" className="btn text-brand px-5 border-[1.2px] border-block lift me-1">
+       <Link to='/sign-up'><div className="flex justify-center items-center text-center text-md-start mt-10">
+            <b className="btn text-brand px-5 border-[1.2px] border-block lift me-1">
                 Get Started
-            </Link>
-        </div>
+            </b>
+        </div></Link> 
     </section>
     
            

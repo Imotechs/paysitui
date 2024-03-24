@@ -1,13 +1,13 @@
 import React ,{useContext} from "react"
 import './Servicecard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTv,faArrowsSpin,faBarcode,faPlugCirclePlus,faMobileScreenButton} from '@fortawesome/free-solid-svg-icons';
+import { faTv,faArrowsSpin,faBarcode,faPlugCirclePlus,faMobileScreenButton, faUser} from '@fortawesome/free-solid-svg-icons';
 import dataplug from '../../../assets/images/dataplug.png'
 import {userProfileContext } from "../../../components/userprofilecontext/UserContext";
 import CoverPreloader from "../../../components/preloader/Coverpreloader";
 import { Link } from "react-router-dom";
 function Servicecard({account}){
-    const {user,loading} = useContext(userProfileContext)
+    const {loading} = useContext(userProfileContext)
 
     return(
         <div className=" row serviceblock">
@@ -18,33 +18,37 @@ function Servicecard({account}){
                 <div className="top-label">Quick Services</div>
             
                 <div className="row main-ft">
-                    <div className="service">
-                    <Link to ="/dashboard/data/data?service=data"><span className="service-icon"><FontAwesomeIcon icon={faArrowsSpin} />
-                    <br/><i className="service-name">Data</i></span></Link>
-                    </div>
+                <Link to ="/dashboard/data/data?service=data" className="custom-link"><div className="service">
+                    <span className="service-icon"><FontAwesomeIcon icon={faArrowsSpin} />
+                    <br/><i className="service-name">Data</i></span>
+                    </div></Link>
                     
-                    <div className="service">
+                    <Link to='/dashboard/tv/service' className="custom-link"><div className="service">
                    <span className="service-icon"><FontAwesomeIcon icon={faTv} />
                     <br/><i className="service-name">TV SUBs</i></span>
-                    </div>
+                    </div></Link>
 
+                    <Link to ="/dashboard/epins/" className="custom-link "> 
                     <div className="service">
                     <span className="service-icon"><FontAwesomeIcon icon={faBarcode} />
                     <br/><i className="service-name">E-Pins/Cards</i></span>
-                    </div>
-
+                    </div></Link>
+                    
+                    <Link to ="/dashboard/electricity/bills/" className="custom-link "> 
                     <div className="service">
                     <span className="service-icon"><FontAwesomeIcon icon={faPlugCirclePlus} />
                     <br/><i className="service-name">Electricity</i></span>
-                    </div>
-                    <div className="service">
-                    <Link to ="/dashboard/data/data?service=airtime"><FontAwesomeIcon icon={faMobileScreenButton} />
-                    <br/><i className="service-name">Airtime</i></Link>
-                    </div>
+                    </div></Link>
+                    <Link to ="/dashboard/data/data?service=airtime" className="custom-link "> 
                     <div className="service">
                     <span className="service-icon"><FontAwesomeIcon icon={faMobileScreenButton} />
+                    <br/><i className="service-name">Airtime</i></span>
+                    </div></Link>
+                    <Link to ="/dashboard/user/account/" className="custom-link "> 
+                    <div className="service">
+                    <span className="service-icon"><FontAwesomeIcon icon={faUser} />
                     <br/><i className="service-name">Ref.& Earn</i></span>
-                    </div>
+                    </div></Link>
                 
                 </div>
                 </div>

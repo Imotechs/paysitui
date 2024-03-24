@@ -2,12 +2,17 @@
     justify-content: center;
     margin: 5px;
     padding: 5px;
+    container-name: news;
+    border-color:var(--primary) ;
 
 }
+
 
 .news .alert{
     border-radius: 20px;
     width: 100%;
+    /* border-color:var(--primary) ; */
+
 }
 
 

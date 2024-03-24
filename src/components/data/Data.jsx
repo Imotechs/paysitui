@@ -16,7 +16,7 @@ import CoverPreloader from "../preloader/Coverpreloader";
 import Message from "../message/Message";
 import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-
+import { buyAirtime } from "../../vitals";
   
 export default function Data(props){
     const [phoneNumber, setPhoneNumber] = useState('')
@@ -34,6 +34,7 @@ export default function Data(props){
     const [messageIsOpen,setMessageIsOpen] = useState(false)
     const [optionSelected, setOptionSelected] = useState('')
     const [airtimeOptions, setAirtimeOptions] = useState('')
+    const [transaction,setTransaction] = useState('')
     const navigateto = useNavigate()
 
   const location = useLocation();
@@ -75,7 +76,7 @@ export default function Data(props){
                   }
 
             }else if(isValid&&service==='airtime'){
-              const listAmount = [100,200,300,400,500]
+              const listAmount = [100,200,300,400,500,1000]
               const amountOptions = listAmount.map((item)=>(
               <option key ={item} network={network} value = {item} amount={item} >{item}</option>
               ))
@@ -91,6 +92,10 @@ export default function Data(props){
       }  
 
     }
+
+  function applyDiscount(amount){
+    return +amount-+amount*0.01
+  }
 
   function handleAmountChange(e){
         if (service ==='data'){
@@ -109,7 +114,7 @@ export default function Data(props){
         }
         else if(service =='airtime'){
           const AmountOption = e.target.options[e.target.selectedIndex];
-          setAmount(AmountOption.getAttribute("amount"));
+          setAmount(applyDiscount(AmountOption.getAttribute("amount")));
           setSelectedPlan(e.target.value)
           let amountdata = {
             key:AmountOption.getAttribute("key"),
@@ -127,25 +132,23 @@ export default function Data(props){
       const fetchDataAndUserProfile = async () => {
         try {
           setLoading(true);
-    
-          const [response, resp] = await Promise.all([
-            fetchData(navigateto),
-            fetchUserProfile(navigateto),
-          ]);
-    
-          if (resp.ok) {
-            const userData = await resp.json();
+          let endppoints = [fetchData(navigateto),
+            fetchUserProfile(navigateto)]
+          if(service=='airtime'){const response = await fetchUserProfile(navigateto)
+            const userData = await response.json();
             setUser(userData);
+          }else{ 
+            const[dataResp,userResp] = await Promise.all(endppoints);
+            const userProfile = await userResp.json();
+            const Data = await dataResp.json();
+            setUser(userProfile);
+            setAvailableData(Data);
           }
-    
-          if (response.ok) {
-            const networkData = await response.json();
-            setAvailableData(networkData);
-          }
-    
-          setLoading(false);
+        
+
         } catch (error) {
           console.error(error);
+        }finally{
           setLoading(false);
         }
       };
@@ -154,15 +157,65 @@ export default function Data(props){
     }, [isTxnPinOpen]);
     
 
-    function submitForm(e){
+    async function submitForm(e){
       e.preventDefault()
-      console.log(user.txn_pin)
-      if (!user.txn_pin){
-        setIsTxnPinOpen(true)
+      //console.log(user.txn_pin)
+      // if (!user.txn_pin){
+      //   setIsTxnPinOpen(true)
 
-      }else{
-        setPassCodeOpen(true)
+      // }else{
+      //   setPassCodeOpen(true)
 
+      // }
+      setLoading(true)
+      if(service ==='data'){
+
+        try{
+          const buyResp =  await buyData({navigateto,selectedPlan,amount,phoneNumber,optionSelected})
+          //console.log(selectedPlan)
+          const data = await buyResp.json()
+          if(data['message']){
+            setMessage(data['message'])
+            setMessageIsOpen(true)
+            setTransaction(data)
+          }else{
+            setMessage('An Error Occur!!')
+            setMessageIsOpen(true)
+          }
+          
+        }catch(e){
+          setMessage('An Error Occur!!')
+          setMessageIsOpen(true)
+        }finally{
+          setLoading(false)
+
+        }
+      }
+
+      else if(service ==='airtime'){
+
+        try{
+          const buyResp =  await buyAirtime({navigateto,amount,phoneNumber,network})
+          //console.log(selectedPlan)
+          const data = await buyResp.json()
+          
+            if(data['message']){
+              setMessage(data['message'])
+              setMessageIsOpen(true)
+              setTransaction(data)
+              console.log(data)
+            }else{
+              setMessage('An Error Occur')
+              setMessageIsOpen(true) 
+            }
+        
+          
+        }catch(e){
+          //setMessage('An Error Occur!!')
+        }finally{
+          setLoading(false)
+
+        }
       }
 
     }
@@ -170,11 +223,7 @@ export default function Data(props){
     function closeTxnPin(){
       setIsTxnPinOpen(false)
     }
-    // function openPassCode(e){
-    //   setPassCodeOpen(true)
-    //   e.preventDefault()
-
-    // }
+    
    function closePassCode(){
     setPassCodeOpen(false)
    };
@@ -186,40 +235,17 @@ function closeMessage(){
 setMessageIsOpen(false)  
 
 setTimeout(()=>{
-window.location.reload()
-},2000)
+setPhoneNumber('')
+
+},1000)
 }
 const handleContinue = async() => {     
       //console.log('Continue with transaction logic');
   
-      // Close the modal after handling the PIN
       closePassCode();
       //check if account balance is okay
       //run the data purchase
-      if(service ==='data'){
-
-        setLoading(true)
-        try{
-          const buyResp =  await buyData({navigateto,selectedPlan,amount,phoneNumber,optionSelected})
-          //console.log(selectedPlan)
-          const data = await buyResp.json()
-          if(data['message']){
-            setMessage(data['message'])
-            setMessageIsOpen(true)
-          }
-          
-        }catch(e){
-  
-        }finally{
-          setLoading(false)
-
-        }
-      }
-
-      else if(service ==='airtime'){
-
-        return;
-      }
+      
 
     };
 
@@ -232,25 +258,25 @@ const handleContinue = async() => {
         <Header></Header>
         <Account/>
         {loading && <CoverPreloader loading={loading}isok ={false}/>}
-        <div className="contents valid-form">
+       {!transaction? <div className="contents valid-form">
             <p className="desc">Experience seamless <b>{service}</b> purchase with our lightning-fast service! At the click of a button, 
                 you can swiftly acquire the <b>{service}</b>  you need without any delays</p>
             <form method="post" className="input-group" onSubmit={submitForm}>
             
                 <div className="phone-number">
                     <input type="text" name="phoneNumber"  className="input-group" autoComplete="off"
-                    placeholder="Phone Number" value={phoneNumber} onChange={handleChange} onPaste={handleChange}/>
+                    placeholder="Phone Number" required value={phoneNumber} onChange={handleChange} onPaste={handleChange}/>
                     <div className="check">
                     {numberIsValid ? (
                                             <span><FontAwesomeIcon icon={faCheck}/>{network}</span>
 
-                    ):(<b className="notvalid">x {network}</b>)}
+                    ):(<b className="notvalid">x{network}</b>)}
                     </div>
                     
                 </div>
 
             <label>Select Plan</label>
-            <select name="data" className="input-group" onChange={handleAmountChange} value={selectedPlan}>
+            <select name="data" className="input-group" onChange={handleAmountChange} value={selectedPlan} required>
                     <option value="0" amount="0">Select Plan</option>
                     {service ==='data'?(selectedData && selectedData.length > 0 ? (
                       //console.log(selectedData);
@@ -261,7 +287,7 @@ const handleContinue = async() => {
                         ))
                     ):(
                        !numberIsValid ? (<option>Enter a valid Phone number</option>):
-                        (<option>0 Data plans Available for selected Network</option>)
+                        (<option>0 Data plans Available for selected Network(Pls wait as we work on it)</option>)
                       
                     )):(<>
                       {airtimeOptions}
@@ -284,7 +310,23 @@ const handleContinue = async() => {
                         )}
                
             </form>
-        </div>
+        </div>:<>
+        
+        
+<div className ='col content tvform'>
+    <h3 className="text-center bg-success rounded-btn">{transaction['message']}</h3>
+      <div className='text-center alert alert-info'>
+      <b>{transaction.qty}</b>  of {service} successfully gifted
+      to  <b>{transaction.number}</b> <br/>
+      {transaction['completed']?<>
+      <i class="fa fa-check-circle"></i><small className='suport' style={{fontSize:'14px',color:'green'}}>Completed</small>
+
+      </>:<>
+      <small className='suport' style={{fontSize:'14px',color:'brown'}}>processing..</small>
+      </>}
+        </div>  
+</div>
+        </>}
         <Message
           isOpen={messageIsOpen}
           message={message}
@@ -302,8 +344,10 @@ const handleContinue = async() => {
         user ={user}
           />
     </UserProfileProvider>
+<div className="ft">
+<Footer/>
 
-        <Footer/>
+</div>
         </>
     )
 }

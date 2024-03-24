@@ -335,11 +335,10 @@ nav ul li{
     align-items: stretch;
     display: flex;
     overflow: hidden;
-    width: 100%;
     position: relative;
-    border-top-right-radius:45px;
-    border-top-left-radius:45px;
-    background-color: rgb(203, 226, 246);
+    /* border-top-right-radius:45px;
+   */ border-top-left-radius:45px; 
+    /* background-color:#18532f; */
 }
 
 .wrapper:before {

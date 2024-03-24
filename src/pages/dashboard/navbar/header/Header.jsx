@@ -10,6 +10,9 @@ export default function Navbar(props){
 
     function toggleNavBar(){
         setIsToggled(!isToggled)
+        setTimeout(()=>
+        {        setIsToggled(false)
+        },7000)
     }
     return(
         <UserProfileProvider>
@@ -17,7 +20,8 @@ export default function Navbar(props){
             
         
 
-	<div className={`${styles['wrapper']} `}>
+	<div className={`${styles['wrapper']} bg-brand-bg `}>
+       
 		<Aside isToggled={isToggled} user = {props.user}/>
         {/* <button className= {`${styles['sidebar-toggle']} ${styles['d-flex']} ${styles['mr-2']}`} > */}
         {/* <FontAwesomeIcon icon={faBell} className=  {`${styles['topright']} ${styles['align-self-center']}`} >

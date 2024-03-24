@@ -56,7 +56,7 @@ export default function Deposit(props) {
 
   function handleChange(e){
     setAmount(e.target.value) 
-    if (+e.target.value >=200){
+    if (+e.target.value >=100){
         setAmountIsValid(true)
     }
     else{

@@ -9,15 +9,19 @@
 .footer{
     display: flex;
     
-    background-color: rgb(203, 226, 246);
+    background-color: #18532f;
     max-height: 100vh;
     margin-top: auto;
-    border-bottom-right-radius: 25px;
+    border-bottom-right-radius: 45px;
     color: black;
     padding: 8px;
     align-content: center;
     text-align: center;
     align-self: center;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      
 }
 
 .footer img{

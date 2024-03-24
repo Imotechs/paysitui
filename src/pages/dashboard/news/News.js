@@ -11,7 +11,7 @@ const News = () => {
       )
     : [];
 const UpdatesComponent = ({ updateData }) => (
-    <div className="container news" key={updateData.id}>
+    <div className="container news" key={updateData.id} style={{'--isNew':'true'}}>
       <div className="alert alert-info">
         <div className="mt-0 mb-2">
           <span className="text-danger">NEW!!!</span>

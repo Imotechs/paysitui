@@ -9,31 +9,46 @@ import glo_logo from './assets/images/glo_logo.png'
 import waec_logo from './assets/images/waec_logo.png'
 import startime_logo from './assets/images/startime_logo.png'
 import spectranet_logo from './assets/images/spectranet_logo.png'
+import gotv from './assets/images/gotv.png'
+import startimes from './assets/images/startime_logo.png'
+import dstv from './assets/images/dstv.png'
+
 // import bills from './assets/images/bills.jpg'
 // import data from './assets/images/data.jpg'
 // import vtu from "./assets/images/vtu.jpg"
 
-export const main_url ='http://localhost:8000'
-export const frontEndUrl = 'http://localhost:3000'
-
-export default function nameToLogo(name){
-    name = name.toLowerCase()
-    const logos = {
-        mtn:mtn_logo,
-        glo:glo_logo,
-        airtel:aitel_logo,
-        '9mobile':etisalat_logo,
-        waec:waec_logo,
-        neco:neco_logo,
-        starttime:startime_logo,
-        spectranet:spectranet_logo,
-        paysit:logo,
-    }
-
-      return logos[name]|| logos['paysit'];
-    
-
+export const main_url ='https://paysit.pythonanywhere.com/api'
+export const frontEndUrl = 'https://paysitui-v1.vercel.app'
+export default function nameToLogo(name) {
+  name = name.toLowerCase();
+  const logos = {
+      mtn: mtn_logo,
+      glo: glo_logo,
+      airtel: aitel_logo,
+      '9mobile': etisalat_logo,
+      waec: waec_logo,
+      neco: neco_logo,
+      starttime: startime_logo,
+      spectranet: spectranet_logo,
+      paysit: logo,
+      gotv:gotv,
+      dstv:dstv,
+      startimes:startimes
+  }
+  
+  const logoArray = Object.keys(logos);
+  let logo_img = 'paysit'; // Default logo if not found
+  
+  for (let i = 0; i < logoArray.length; i++) {
+      if (name.includes(logoArray[i])) {
+          logo_img = logoArray[i];
+          break; // Exit loop once logo is found
+      }
+  }
+  
+  return logos[logo_img];
 }
+
 
 
 //phone number validation
@@ -239,10 +254,10 @@ export const fetchUserProfile = async ({navigateto}) => {
       if(response.ok){
         return response
       }else{
-        navigateto('/')
+        navigateto('/login')
       }    
     } catch (error) {
-      console.error('Error during  the fetchUserProfile:', error);
+      //console.error('Error during  the fetchUserProfile:', error);
       navigateto('/')
 
     } finally {
@@ -303,6 +318,29 @@ export const buyData =async({navigateto,selectedPlan,amount,phoneNumber,optionSe
 }
 
 
+export const buyAirtime =async({navigateto,network,amount,phoneNumber})=>{
+  const accessToken = await getAccessToken({ navigateto });
+  try {
+       const response = await fetch(`${main_url}/buy/airtime/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`, // Include the access token in the Authorization header
+        },
+        body: JSON.stringify({network:network,amount:amount,phone:phoneNumber}),
+
+      });
+
+    return response
+  } catch (error) {
+    console.error('Error during fetchUserProfile:', error);
+  } finally {
+    //setLoading(false);
+
+    //return response
+}
+
+}
 
 export const setTransactionPin = async ({navigateto,accountPassword,pin2})=>{
   //console.log('this fetch calll executeed')
@@ -347,13 +385,31 @@ export const initiatePayment = async ({navigateto,amount})=>{
 }
 
 
+export const withDrawFunds = async ({navigateto,amount,accounNumber,bankName})=>{
+  //console.log('this fetch calll executeed')
+  const accessToken = await getAccessToken({navigateto})
+   try {
+    const response = await fetch(`${main_url}/withdraw/`, {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${accessToken}`, // Include the access token in the Authorization header
+     },
+     body: JSON.stringify({amount:amount,account:accounNumber,bank_name:bankName}),
 
+   });
+
+ return response
+} catch (error) {
+ //console.error('Error during fetchUserProfile:', error);
+} 
+}
 
 export const verifyPayment =  async({navigateto,data})=>{
   //console.log('this fetch calll executeed')
  const  accessToken = getAccessToken({navigateto})
    try {
-    const response =  fetch(`${main_url}/payment/init/`, {
+    const response =  fetch(`${main_url}/payment/verify/`, {
      method: 'POST',
      headers: {
        'Content-Type': 'application/json',
@@ -392,5 +448,114 @@ export const convertCommision =  async({navigateto,amount})=>{
 
 } catch (error) {
  //console.error('Error during fetchUserProfile:', error);
+} 
+}
+
+
+
+export const fetchTvPlans = async ({ navigateto, tv }) => {
+  const accessToken = await getAccessToken({ navigateto });
+
+  try {
+    
+    const response = await fetch(`${main_url}/tv/service/?tv=${tv}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`, // Include the access token in the Authorization header
+      },
+    });
+
+    return response;
+  } catch (error) {
+    console.error('Error during fetchTvPlans:', error);
+    //navigateto('/')
+  }
+}
+
+
+export const verifyIUC =  async({navigateto,logoName,IUC})=>{
+  //console.log('this fetch calll executeed')
+ const  accessToken = getAccessToken({navigateto})
+   try {
+    const response =  fetch(`${main_url}/tv/service/`, {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${useToken}`, // Include the access token in the Authorization header
+     },
+     body: JSON.stringify({iuc_number:IUC,service:logoName,action:'verify'}),
+
+   });
+
+ return  await response
+
+} catch (error) {
+ //console.error('Error during fetchUserProfile:', error);
+} 
+}
+
+
+
+export const buyTvPlan =  async({navigateto,logoName,IUCNumber,phoneNumber,amount})=>{
+  //console.log('this fetch calll executeed')
+ const  accessToken = getAccessToken({navigateto})
+   try {
+    const response =  fetch(`${main_url}/tv/service/`, {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${useToken}`, // Include the access token in the Authorization header
+     },
+     body: JSON.stringify({iuc_number:IUCNumber,service:logoName,action:'buy',phone:phoneNumber,amount:amount}),
+
+   });
+
+ return  await response
+
+} catch (error) {
+} 
+}
+
+
+
+export const verifyMeterNo =  async({navigateto,supplier,meterNo,plan})=>{
+  //console.log('this fetch calll executeed')
+ const  accessToken = getAccessToken({navigateto})
+   try {
+    const response =  fetch(`${main_url}/electricity/bills/`, {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${useToken}`,
+     },
+     body: JSON.stringify({service:supplier,meter_number:meterNo,action:'verify',plan:plan}),
+
+   });
+
+ return  await response
+
+} catch (error) {
+} 
+}
+
+
+export const payElectricBill =  async({navigateto,supplier,plan,meterNo,amount,})=>{
+  //console.log('this fetch calll executeed')
+ const  accessToken = getAccessToken({navigateto})
+   try {
+    const response =  fetch(`${main_url}/electricity/bills/`, {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${useToken}`,
+     },
+     body: JSON.stringify({service:supplier,meter_number:meterNo,action:'buy',plan:plan,amount:amount}),
+
+   });
+
+ return  await response
+
+} catch (error) {
 } 
 }
