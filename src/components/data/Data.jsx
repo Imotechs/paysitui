@@ -264,7 +264,7 @@ const handleContinue = async() => {
             <form method="post" className="input-group" onSubmit={submitForm}>
             
                 <div className="phone-number">
-                    <input type="text" name="phoneNumber"  className="input-group" autoComplete="off"
+                    <input type="number" name="phoneNumber"  className="input-group" autoComplete="off"
                     placeholder="Phone Number" required value={phoneNumber} onChange={handleChange} onPaste={handleChange}/>
                     <div className="check">
                     {numberIsValid ? (
@@ -313,7 +313,7 @@ const handleContinue = async() => {
         </div>:<>
         
         
-<div className ='col content tvform'>
+  {transaction.number&&<div className ='col content tvform'>
     <h3 className="text-center bg-success rounded-btn">{transaction['message']}</h3>
       <div className='text-center alert alert-info'>
       <b>{transaction.qty}</b>  of {service} successfully gifted
@@ -325,7 +325,7 @@ const handleContinue = async() => {
       <small className='suport' style={{fontSize:'14px',color:'brown'}}>processing..</small>
       </>}
         </div>  
-</div>
+</div>}
         </>}
         <Message
           isOpen={messageIsOpen}

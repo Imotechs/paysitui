@@ -41,10 +41,10 @@ function App() {
     neco_logo,
   ];
 
-  const images = [dataplugs,dataplugs,dataplugs, paysit];
-  const randomIndex = Math.floor(Math.random() * images.length);
+  //const images = [dataplugs,dataplugs,dataplugs, paysit];
+  //const randomIndex = Math.floor(Math.random() * images.length);
   
-  const displayImage = images[randomIndex];
+  const displayImage = paysit;
 
   return (
     <div className="App ">

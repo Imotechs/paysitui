@@ -52,7 +52,7 @@ export default function VerifyEmail (){
 	<CoverPreloader loading={loading} isok={false}/> 
     
     <h2 className="emailsuccess">
-    <b className="support">{responseMessage}</b></h2>
+    <b className="support text-center">{responseMessage}</b></h2>
 		  {success && <Link to ='/login'><button className="verifybtn btn text-brand px-5 border-[1.2px] border-block lift me-1" type='submit'>Proceed to Login </button> </Link>}
               
         

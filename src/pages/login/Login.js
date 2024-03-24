@@ -10,6 +10,7 @@ import Preloader from '../../components/preloader/Preloader';
 import CoverPreloader from '../../components/preloader/Coverpreloader';
 import { useNavigate } from 'react-router-dom';
 import { PasswordChangeRequest } from '../../vitals';
+import Footer from '../dashboard/footer/Footer';
 function Login() {
 	const [userName, setUsername] = useState('')
 	const [password, setPassword] = useState('')
@@ -66,7 +67,7 @@ function Login() {
 		setTimeout(()=>{
 			setPasswordChange(true)
 			setLoading(false)
-		},3000)
+		},1500)
 	}
 	  
 	function handleUserEmailChange(e){
@@ -104,11 +105,11 @@ function Login() {
               <input type="text" name="email"
 								placeholder="Email"  value={userEmail} required onChange={handleUserEmailChange} />
 						</div>
-         <button className="verifybtn btn text-brand px-5 border-[1.2px] border-block lift me-1" type='submit'>Request pasword Change</button>
+         <button className="verifybtn btn text-brand px-5 border-[1.2px] border-block lift me-1" type='submit'>RequestChange</button>
 		</form>
     <p className="support-text">Need help? <b className="support">Contact Customer Support </b> @<a mailto ='paysit.info@gmail.com' className="txt-email">paysit.info@gmail.com</a></p>
 </div> 
-                </div>
+               </div>
             ):(
 
   <section className="w3l-form-36">
