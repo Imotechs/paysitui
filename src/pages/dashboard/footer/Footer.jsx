@@ -8,12 +8,15 @@ export default function Footer(){
         <footer className={Styles['row']}>
             <div className={`${Styles['col']} ${Styles['left']}`}>
             <Link to ="/about-us"> <img src ={logo} alt ='logo'/></Link>
-                <p>PaysIt © 2021. </p>
+                <p style={{color:'white'}}>PaysIt © 2021 </p>
+                <small>
+                    For your Virtual Top Ups.
+                </small>
             </div>
-            <div className={`${Styles['col']} ${Styles['right']}`}>
+            <div className={`${Styles['col']} ${Styles['right']}`} style={{fontSize:'18px', color:'white'}}>
 
-                <i className="fa fa-phone"></i> <i className="fa fa-whatsapp mx-1"></i> 
-                <a href="https://api.whatsapp.com/send?phone=2349016608852" className="btn-link"></a>
+                <i className="fa fa-phone"></i> &nbsp; <i className="fa fa-whatsapp mx-1"></i> 
+                <a href="https://wa.me/message/DHCVWD7K25CWB1" className="btn-link"></a>
             </div>
         </footer>	
        </div>
