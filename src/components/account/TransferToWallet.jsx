@@ -98,33 +98,16 @@ export default function TransferToWallet(){
         <Header/>
         <Account/>
         <div className="login">
-    <div className="convert">
-    <div className="verification-container">
-        
-	<CoverPreloader loading={loading} isok={false}/> 
-    <form onSubmit={submitForm} className="convertform">
-    <h2 className="emailsuccess">
-        <b className="support">Enter Amount</b></h2>
-        {!message && <input type="number" placeholder="Amount" name="amount" value={amount} onChange={changeAmount}></input>}
-        <h2 style={{marginLeft:'50px'}}>{message}</h2>
-        <br/>
-		<button className=" btn text-brand px-5 border-[1.2px] border-block lift me-1" type='submit'>Proceed</button>
-              
-        </form>
-    <p className="support-text">Need help? <b className="support">Contact Customer Support </b> @<a mailto ='paysit.info@gmail.com' className="txt-email">paysit.info@gmail.com</a></p>
-</div> 
-                
-                
-                </div>
-                <div className="login">
+
+      <div className="login">
     <div className='desc container'>
-    <b className="support" style={{marginLeft:'0px',fontSize:'20px'}}>Notice;</b>
+    <b className="support text-center" style={{marginLeft:'80px',fontSize:'20px'}}>HOW IT WORKS</b>
                     <p>Commissions you earn from your friends can be transfered into your main wallet,
                         and you can use it to pay for any of our services on <b>PaysIt</b>
                     </p>
-                    <b className="support" style={{marginLeft:'90px',fontSize:'20px'}}>How to Earn Commissions</b>
+                    <b className="support" style={{marginLeft:'0px',fontSize:'20px'}}>How to Earn Commissions</b>
                         <ol>
-                            <li> Coppy your invit Link or code</li>
+                            <li> Copy your invite Link or code</li>
                             <li>Send it to your friends to sign up and enjoy our services just as we hope you are doing.
                                 (Give them the link or the 5Digits Code).
                             </li>
@@ -133,7 +116,7 @@ export default function TransferToWallet(){
                             <p>You can transfer your commisions to your wallet and spend them just like your deposited funds</p>
                         </ol>
 
-                        <b className="support" style={{marginLeft:'90px',fontSize:'20px'}}>My Invit Link & Code</b>
+                        <b className="support" style={{marginLeft:'90px',fontSize:'20px'}}>My Invite Link & Code</b>
                         <div className="row">
                             <div className="col">
                             <input  className='refcode' placeholder={refLink} name="refcode" value={refLink} readOnly onClick={copyThisText}></input>
@@ -157,8 +140,27 @@ export default function TransferToWallet(){
                 
             </div>
     </div>
-    
+    <div className="convert">
+    <div className="verification-container">
+        
+	<CoverPreloader loading={loading} isok={false}/> 
+    <form onSubmit={submitForm} className="convertform text-center">
+    <h2 className="emailsuccess">
+      <h5 className="text-center">Convert Commissions</h5>
+        </h2>
+        {!message && <input type="number" placeholder="Amount" name="amount" value={amount} onChange={changeAmount}></input>}
+        <h2 style={{marginLeft:'50px'}}>{message}</h2>
+        <br/>
+		<button className=" btn text-brand px-5 border-[1.2px] border-block lift me-1" type='submit'>Proceed</button>
+              
+        </form>
+    <p className="support-text">Need help? <b className="support">Contact Customer Support </b> @<a mailto ='paysit.info@gmail.com' className="txt-email">paysit.info@gmail.com</a></p>
+</div> 
+                
+                
+                </div>
     </div>
+    
     
         <Footer/>
         

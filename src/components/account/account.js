@@ -67,21 +67,21 @@ const Account =()=>{
                 </div>
             </div>
         <hr/>
-        <div className=" row items">
-                <Link to='/dashboard/user-withdraw/' className='custom-link '><div className="col withdrow">
+        <div className=" row acc-items">
+                <Link to='/dashboard/user-withdraw/' className='custom-link '><div className="col acc-item">
                 <FontAwesomeIcon icon={faBank}/>
                 <p>Withdraw</p>
                 </div></Link>
-                <div className='col dashbord'>
+                <div className='col acc-item'>
                 <Link to ='/dashboard/user-deposit/' className='custom-link '>
                 <i className="align-middle mr-2 fa fa-id-card"></i> 
                 <p>Deposit</p></Link>
                 </div>
-                <div className='col dashbord'>
+                <div className='col acc-item'>
                 <Link to ='/dashboard' className='custom-link '><FontAwesomeIcon icon={faEthernet}/>
                 <p>DashBoard</p></Link>
                 </div>
-                <Link to="https://wa.me/message/DHCVWD7K25CWB1" className='custom-link '><div className='col dashbord'>
+                <Link to="https://wa.me/message/DHCVWD7K25CWB1" className='custom-link '><div className='col acc-item'>
                 <FontAwesomeIcon icon={faMessage}/>
                 <p>Support</p>
                 </div></Link>

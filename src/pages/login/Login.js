@@ -125,7 +125,7 @@ function Login() {
 											<div className="form-input">
 							<span className="fa fa-user" aria-hidden="true"></span> 
               <input type="text" name="email"
-								placeholder="Email/PhoneNumber/Username"  value={userName}required onChange={handleUsernameChange} />
+								placeholder="Email/Phone/Usern."  value={userName}required onChange={handleUsernameChange} />
 						</div>
 						<div className="form-input">
 							<span className="fa fa-lock" aria-hidden="true"></span> 

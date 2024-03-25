@@ -13,7 +13,7 @@ export default function Epins(){
     	 <Account/>
         
              
-      <div className="col s12" >
+      <div className="col contents" >
         <div className="card-panel hoverable" >  
     
         <div className="row" > 
@@ -72,7 +72,7 @@ export default function Epins(){
 </div>
 </div>
 </div>
-                  
+         <div className='contents' style={{marginBottom:'60px'}}></div>         
  <div className='ft'>
     <Footer/>
  </div>
