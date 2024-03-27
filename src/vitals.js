@@ -18,7 +18,7 @@ import dstv from './assets/images/dstv.png'
 // import vtu from "./assets/images/vtu.jpg"
 
 export const main_url = 'https://paysitbackend.onrender.com/api' //'http://localhost:8000/api'
-export const frontEndUrl = 'https://paysitui-v1.vercel.app'
+export const frontEndUrl = 'https://paysit.onrender.com/'
 export default function nameToLogo(name) {
   name = name.toLowerCase();
   const logos = {

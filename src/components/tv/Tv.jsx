@@ -204,7 +204,7 @@ export default function Tv(){
         {loading &&<CoverPreloader loading={loading} isok = {false}/>}
            
  {tvData.length>0 && 
- <div className="tvform">
+ <div className="tvform" style={{minHeight:'250px'}}>
     <div className="tv-logo"><img src={tvSets[logoName]} alt="logo"/></div>
  <form onSubmit={submitForm}>
 
@@ -212,10 +212,10 @@ export default function Tv(){
         <option value='0'>Select Plan</option>
     {options}
     </select>
-    <input type="text" placeholder="Phone Number" name='phonNumber'value ={phoneNumber} onChange={changePhoneNumber} required/>
+    <input type="number" placeholder="Phone Number" name='phonNumber'value ={phoneNumber} onChange={changePhoneNumber} required/>
     <input type="text"  placeholder= {monitize(amount)} name='amount' readOnly/>
     <input type="text"  placeholder= {monitize(amount)} name='amount'value ={amount} hidden readOnly/>
-    <input type="text" placeholder="Decoder/IUC Number" name='iucNumber'value ={IUCNumber} required onChange={changeIUCNumber} onPaste={changeIUCNumber}/>
+    <input type="number" placeholder="Decoder/IUC Number" name='iucNumber'value ={IUCNumber} required onChange={changeIUCNumber} onPaste={changeIUCNumber}/>
     <span id="amountpay" style={{color:'brown',marginLeft:'40px',letterSpacing:'0.2rem'}}>
     {verifying &&<i class="fa fa-spinner spinner"></i>}
     <span id="dstv_stats">
