@@ -73,9 +73,7 @@ export default function Epins(){
 </div>
 </div>
          <div className='contents' style={{marginBottom:'60px'}}></div>         
- <div className='ft'>
-    <Footer/>
- </div>
+
 </div>
     )
 }
