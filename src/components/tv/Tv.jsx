@@ -239,9 +239,7 @@ export default function Tv(){
           message={message}
           onClose={closeMessage}
           />
-<div className="ft">
-<Footer/>
-</div>
+    <Footer/>
 </>  
 
     )
