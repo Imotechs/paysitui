@@ -26,6 +26,7 @@ body {
     margin-top: 60px;
     margin-left: 0px;
     text-align: center;
+    overflow-x: auto;
 }
 
 .light-blue-text,b {

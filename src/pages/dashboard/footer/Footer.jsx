@@ -15,8 +15,11 @@ export default function Footer(){
             </div>
             <div className={`${Styles['col']} ${Styles['right']}`} style={{fontSize:'18px', color:'white'}}>
 
-                <i className="fa fa-phone"></i> &nbsp; <i className="fa fa-whatsapp mx-1"></i> 
-                <a href="https://wa.me/message/DHCVWD7K25CWB1" className="btn-link"></a>
+                <i className="fa fa-phone"></i> &nbsp; <i className="fa fa-whatsapp mx-1">
+                <a href="https://wa.me/message/DHCVWD7K25CWB1" className="btn-link"></a></i> 
+
+                <i className="fa fa-twitter mx-1">
+                <a href="https://x.com/PaysitNG?t=PVTwzySBa6r-U1B89JwidA&s=09" className="btn-link"></a></i> 
             </div>
         </footer>	
        </div>

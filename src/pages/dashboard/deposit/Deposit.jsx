@@ -164,7 +164,7 @@ export default function Deposit(props) {
 
           <div className='desc'>
                         <ol>
-                            <li> Coppy your personalized account Number Above if its Available</li>
+                            <li> Copy your personalized account Number Above if its Available</li>
                             <li>Use any Bank of your choice and transfer the Amount you want to fund your wallet
                                 (this can be any Bank including Mobile Banking App and USSD).
                             </li>

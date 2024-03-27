@@ -59,7 +59,13 @@ export default function Aside({isToggled}){
                     <div className={styles['row']}>
                     <div className={styles['col']}>
                     <div  className={styles['font-weight-bold']}>Main Balance</div>
-					<small >{walletBalance}</small>
+					<small  style={{fontSize:'24px'}}>{walletBalance}</small>
+					<small>
+					<small>
+						<Link to ='/dashboard/user/account/'><button className={`border-block ${styles['convertbtn']}`}>Deposit</button>
+						</Link>
+						</small>
+                    </small>
                     </div>
                     <div className={styles['col']}>
                     <div  className={styles['font-weight-bold']}>Commissions</div>

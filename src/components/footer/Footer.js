@@ -24,7 +24,7 @@ function Footer (){
                     <p className="text-sm   text-white">WAEC/NECO &JAMB E-Pins</p>
                     <p className="text-sm  text-white">Cable Subscription</p>
             	</div>
-            	<div className="col text-center"  >
+            	<div className="col text-center  "  >
                     <p className="text-sm bg-warning">Others</p>
                     <p className="text-sm  text-white">Partner with Us</p>
                     <p className="text-sm  text-white">FAQs</p>
@@ -34,13 +34,13 @@ function Footer (){
             
                 <div className="flex items-center col space-x-8">
 
-                	<Link to="https://facebook.com/paysit" className="social-icon" >
+                	<Link to="https://facebook.com/profile.php?id=61557658864380" className="social-icon" >
                         <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
                             <path d="M36 2H4a2 2 0 0 0-1 2v32a2 2 0 0 0 1 1h16V24h-4v-5h4v-4c0-5 3-7 7-7h5v5h-4c-2 0-2 1-2 2v4h5l-1 5h-4v13h10a2 2 0 0 0 2-1V4a2 2 0 0 0-2-2Z" fill="#fff"/>
                         </svg>                      
                 	</Link>
                 
-                	<Link to="https://twitter.com/paysit" className="social-icon" >
+                	<Link to="https://x.com/PaysitNG?t=PVTwzySBa6r-U1B89JwidA&s=09" className="social-icon" >
                         <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
                             <path d="m39 9-5 1 4-4-5 1a8 8 0 0 0-13 6v1A22 22 0 0 1 4 6a7 7 0 0 0 2 10H3c0 3 2 6 6 7a8 8 0 0 1-4 0c1 3 4 5 8 5a16 16 0 0 1-12 4l12 3a22 22 0 0 0 22-23l4-3Z" fill="#fff"/>
                         </svg>

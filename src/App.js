@@ -187,7 +187,7 @@ function App() {
                 </div>
 
                 <p className="text-center text-black mb-0">
-                    Aquire Data from us via our USSD channels, very easy and Fast
+                    Acquire Data from us via our USSD channels, very easy and Fast
                 </p>
 
             </div>

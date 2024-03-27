@@ -7,8 +7,8 @@
   
   .slideshow-container .slide {
     min-width: 20%;
-    margin-right: -10px; /* Adjust the margin to reduce space between images */
-    animation: moveSlideshow 2s linear infinite; /* Adjust the animation duration as needed */
+    margin-right: -5px; /* Adjust the margin to reduce space between images */
+    animation: slide 5s  linear infinite; /* Adjust the animation duration as needed */
     transition: opacity 0.5s ease-out;
 
   }
@@ -17,6 +17,9 @@
   @keyframes slide {
     0% {
       transform: translateX(0);
+    } 
+    50% {
+      transform: translateX(-150);
     }
     100% {
       transform: translateX(-300%);
@@ -24,6 +27,7 @@
   }
   
   @keyframes moveSlideshow {
+  
     100% { 
       transform: translateX(-66.6666%);  
     }
