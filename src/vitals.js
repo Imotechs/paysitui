@@ -17,7 +17,7 @@ import dstv from './assets/images/dstv.png'
 // import data from './assets/images/data.jpg'
 // import vtu from "./assets/images/vtu.jpg"
 
-export const main_url = 'https://api.paysit.net/api' //'http://localhost:8000/api'
+export const main_url = 'https://www.api.paysit.net/api' //'http://localhost:8000/api'
 export const frontEndUrl = 'https://paysit.net'
 export default function nameToLogo(name) {
   name = name.toLowerCase();
